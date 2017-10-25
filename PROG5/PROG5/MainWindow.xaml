@@ -8,17 +8,9 @@
         Title="MainWindow" Height="350" Width="507.673" ResizeMode="NoResize"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid Margin="0,0,2,0">
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="10,10,0,0" Height="35"/>
+        <Button Content="Add Ninja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="10,10,0,0" Height="35" />
         <Button Content="Button" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="102" Height="35"/>
-        <ListBox HorizontalAlignment="Left" Height="299" Margin="117,10,0,0" VerticalAlignment="Top" Width="185">
-            <ListView Height="289" Width="175">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ListBox>
+        <ListBox HorizontalAlignment="Left" Height="299" Margin="117,10,0,0" VerticalAlignment="Top" Width="185" ItemsSource="{ Binding NinjaCollection }"/>
 
     </Grid>
 </Window>

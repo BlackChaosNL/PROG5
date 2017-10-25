@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Net.NetworkInformation;
 using PROG5.Entities;
 using PROG5.Repository.Interfaces;
 using PROG5.ViewModel;
@@ -9,7 +10,15 @@ namespace PROG5.Repository.Repos
     {
         public ObservableCollection<NinjaViewModel> GetAll()
         {
-            throw new System.NotImplementedException();
+            var ninjas = new ObservableCollection<NinjaViewModel>();
+            using (var ctx = new DatabaseModelContainer())
+            {
+                foreach (var ninja in ctx.NinjaSet)
+                {
+                    ninjas.Add(new NinjaViewModel() { Id = ninja.Id, Gold = ninja.Gold });
+                }
+            }
+            return ninjas;
         }
 
         public bool Add(NinjaViewModel item)

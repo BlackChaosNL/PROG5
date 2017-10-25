@@ -27,14 +27,18 @@ namespace PROG5.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             // Register the Entities in our program, we love us some domain specific classes.
-            SimpleIoc.Default.Register<PROG5Entities>();
+            SimpleIoc.Default.Register<DatabaseModelContainer>();
             // Set some repositories for data access.
             SimpleIoc.Default.Register<INinjaRepository, NinjaRepository>();
             // Add the VMs, we love some virtual machines.
             SimpleIoc.Default.Register<NinjaViewModel>();
+            SimpleIoc.Default.Register<ShowNinjaViewModel>();
+            SimpleIoc.Default.Register<NinjaEquipmentViewModel>();
+            SimpleIoc.Default.Register<EquipmentTypeViewModel>();
+            SimpleIoc.Default.Register<EquipmentViewModel>();
         }
 
-        public NinjaViewModel Main => ServiceLocator.Current.GetInstance<NinjaViewModel>();
+        public ShowNinjaViewModel Main => ServiceLocator.Current.GetInstance<ShowNinjaViewModel>();
 
         public static void Cleanup()
         {

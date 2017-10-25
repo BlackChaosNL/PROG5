@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/25/2017 17:14:30
+-- Date Created: 10/25/2017 20:28:53
 -- Generated from EDMX file: C:\Users\jjvij\git\PROG5\PROG5\PROG5.Entities\Entities.edmx
 -- --------------------------------------------------
 
@@ -51,8 +51,7 @@ GO
 -- Creating table 'NinjaSet'
 CREATE TABLE [dbo].[NinjaSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Gold] int  NOT NULL,
-    [NinjaEquipment_Id] int  NOT NULL
+    [Gold] int  NOT NULL
 );
 GO
 
@@ -71,7 +70,8 @@ GO
 -- Creating table 'NinjaEquipmentSet'
 CREATE TABLE [dbo].[NinjaEquipmentSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Equipment_Id] int  NOT NULL
+    [Ninja_Id] int  NULL,
+    [Equipment_Id] int  NULL
 );
 GO
 
@@ -114,19 +114,19 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [NinjaEquipment_Id] in table 'NinjaSet'
-ALTER TABLE [dbo].[NinjaSet]
+-- Creating foreign key on [Ninja_Id] in table 'NinjaEquipmentSet'
+ALTER TABLE [dbo].[NinjaEquipmentSet]
 ADD CONSTRAINT [FK_NinjaNinjaEquipment]
-    FOREIGN KEY ([NinjaEquipment_Id])
-    REFERENCES [dbo].[NinjaEquipmentSet]
+    FOREIGN KEY ([Ninja_Id])
+    REFERENCES [dbo].[NinjaSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_NinjaNinjaEquipment'
 CREATE INDEX [IX_FK_NinjaNinjaEquipment]
-ON [dbo].[NinjaSet]
-    ([NinjaEquipment_Id]);
+ON [dbo].[NinjaEquipmentSet]
+    ([Ninja_Id]);
 GO
 
 -- Creating foreign key on [Equipment_Id] in table 'NinjaEquipmentSet'

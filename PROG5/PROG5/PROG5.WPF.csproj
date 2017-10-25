@@ -81,7 +81,11 @@
     <Compile Include="Repository\Interfaces\IBaseInterface.cs" />
     <Compile Include="Repository\Interfaces\INinjaRepository.cs" />
     <Compile Include="Repository\Repos\NinjaRepository.cs" />
+    <Compile Include="ViewModel\EquipmentTypeViewModel.cs" />
+    <Compile Include="ViewModel\EquipmentViewModel.cs" />
+    <Compile Include="ViewModel\NinjaEquipmentViewModel.cs" />
     <Compile Include="ViewModel\NinjaViewModel.cs" />
+    <Compile Include="ViewModel\ShowNinjaViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -124,7 +128,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
