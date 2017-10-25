@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DatabaseModelStoreContainer">
+    <EntitySet Name="NinjaSet" EntityType="DatabaseModel.Store.NinjaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EquipmentSet" EntityType="DatabaseModel.Store.EquipmentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NinjaEquipmentSet" EntityType="DatabaseModel.Store.NinjaEquipmentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EquipmentTypeSet" EntityType="DatabaseModel.Store.EquipmentTypeSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="NinjaNinjaEquipment" Association="DatabaseModel.Store.NinjaNinjaEquipment">
+      <End Role="Ninja" EntitySet="NinjaSet" />
+      <End Role="NinjaEquipment" EntitySet="NinjaEquipmentSet" />
+    </AssociationSet>
+    <AssociationSet Name="EquipmentNinjaEquipment" Association="DatabaseModel.Store.EquipmentNinjaEquipment">
+      <End Role="Equipment" EntitySet="EquipmentSet" />
+      <End Role="NinjaEquipment" EntitySet="NinjaEquipmentSet" />
+    </AssociationSet>
+    <AssociationSet Name="EquipmentTypeEquipment" Association="DatabaseModel.Store.EquipmentTypeEquipment">
+      <End Role="EquipmentType" EntitySet="EquipmentTypeSet" />
+      <End Role="Equipment" EntitySet="EquipmentSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="NinjaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gold" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NinjaEquipment_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EquipmentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Int" Type="int" Nullable="false" />
+    <Property Name="Str" Type="int" Nullable="false" />
+    <Property Name="Agi" Type="int" Nullable="false" />
+    <Property Name="Gold" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EquipmentType_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NinjaEquipmentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Equipment_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EquipmentTypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="NinjaNinjaEquipment">
+    <End Role="Ninja" Type="DatabaseModel.Store.NinjaSet" Multiplicity="*" />
+    <End Role="NinjaEquipment" Type="DatabaseModel.Store.NinjaEquipmentSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="NinjaEquipment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ninja">
+        <PropertyRef Name="NinjaEquipment_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EquipmentNinjaEquipment">
+    <End Role="Equipment" Type="DatabaseModel.Store.EquipmentSet" Multiplicity="1" />
+    <End Role="NinjaEquipment" Type="DatabaseModel.Store.NinjaEquipmentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NinjaEquipment">
+        <PropertyRef Name="Equipment_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EquipmentTypeEquipment">
+    <End Role="EquipmentType" Type="DatabaseModel.Store.EquipmentTypeSet" Multiplicity="1" />
+    <End Role="Equipment" Type="DatabaseModel.Store.EquipmentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EquipmentType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="EquipmentType_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DatabaseModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="NinjaSet" EntityType="DatabaseModel.Ninja" />
+          <EntitySet Name="EquipmentSet" EntityType="DatabaseModel.Equipment" />
+          <EntitySet Name="NinjaEquipmentSet" EntityType="DatabaseModel.NinjaEquipment" />
+          <AssociationSet Name="NinjaNinjaEquipment" Association="DatabaseModel.NinjaNinjaEquipment">
+            <End Role="Ninja" EntitySet="NinjaSet" />
+            <End Role="NinjaEquipment" EntitySet="NinjaEquipmentSet" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentNinjaEquipment" Association="DatabaseModel.EquipmentNinjaEquipment">
+            <End Role="Equipment" EntitySet="EquipmentSet" />
+            <End Role="NinjaEquipment" EntitySet="NinjaEquipmentSet" />
+          </AssociationSet>
+          <EntitySet Name="EquipmentTypeSet" EntityType="DatabaseModel.EquipmentType" />
+          <AssociationSet Name="EquipmentTypeEquipment" Association="DatabaseModel.EquipmentTypeEquipment">
+            <End Role="EquipmentType" EntitySet="EquipmentTypeSet" />
+            <End Role="Equipment" EntitySet="EquipmentSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Ninja">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="NinjaEquipment" Relationship="DatabaseModel.NinjaNinjaEquipment" FromRole="Ninja" ToRole="NinjaEquipment" />
+          <Property Name="Gold" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Int" Type="Int32" Nullable="false" />
+          <Property Name="Str" Type="Int32" Nullable="false" />
+          <Property Name="Agi" Type="Int32" Nullable="false" />
+          <Property Name="Gold" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="NinjaEquipment" Relationship="DatabaseModel.EquipmentNinjaEquipment" FromRole="Equipment" ToRole="NinjaEquipment" />
+          <NavigationProperty Name="EquipmentType" Relationship="DatabaseModel.EquipmentTypeEquipment" FromRole="Equipment" ToRole="EquipmentType" />
+        </EntityType>
+        <EntityType Name="NinjaEquipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Ninja" Relationship="DatabaseModel.NinjaNinjaEquipment" FromRole="NinjaEquipment" ToRole="Ninja" />
+          <NavigationProperty Name="Equipment" Relationship="DatabaseModel.EquipmentNinjaEquipment" FromRole="NinjaEquipment" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="NinjaNinjaEquipment">
+          <End Type="DatabaseModel.Ninja" Role="Ninja" Multiplicity="1" />
+          <End Type="DatabaseModel.NinjaEquipment" Role="NinjaEquipment" Multiplicity="1" />
+        </Association>
+        <Association Name="EquipmentNinjaEquipment">
+          <End Type="DatabaseModel.Equipment" Role="Equipment" Multiplicity="1" />
+          <End Type="DatabaseModel.NinjaEquipment" Role="NinjaEquipment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Equipment" Relationship="DatabaseModel.EquipmentTypeEquipment" FromRole="EquipmentType" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="EquipmentTypeEquipment">
+          <End Type="DatabaseModel.EquipmentType" Role="EquipmentType" Multiplicity="1" />
+          <End Type="DatabaseModel.Equipment" Role="Equipment" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseModelContainer">
+    <EntitySetMapping Name="NinjaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Ninja)">
+        <MappingFragment StoreEntitySet="NinjaSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EquipmentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Equipment)">
+        <MappingFragment StoreEntitySet="EquipmentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Int" ColumnName="Int" />
+          <ScalarProperty Name="Str" ColumnName="Str" />
+          <ScalarProperty Name="Agi" ColumnName="Agi" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NinjaEquipmentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.NinjaEquipment)">
+        <MappingFragment StoreEntitySet="NinjaEquipmentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EquipmentTypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.EquipmentType)">
+        <MappingFragment StoreEntitySet="EquipmentTypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="NinjaNinjaEquipment" TypeName="DatabaseModel.NinjaNinjaEquipment" StoreEntitySet="NinjaSet">
+      <EndProperty Name="NinjaEquipment">
+        <ScalarProperty Name="Id" ColumnName="NinjaEquipment_Id" />
+      </EndProperty>
+      <EndProperty Name="Ninja">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EquipmentNinjaEquipment" TypeName="DatabaseModel.EquipmentNinjaEquipment" StoreEntitySet="NinjaEquipmentSet">
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="Id" ColumnName="Equipment_Id" />
+      </EndProperty>
+      <EndProperty Name="NinjaEquipment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EquipmentTypeEquipment" TypeName="DatabaseModel.EquipmentTypeEquipment" StoreEntitySet="EquipmentSet">
+      <EndProperty Name="EquipmentType">
+        <ScalarProperty Name="Id" ColumnName="EquipmentType_Id" />
+      </EndProperty>
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
