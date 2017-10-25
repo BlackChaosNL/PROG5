@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/25/2017 13:14:27
--- Generated from EDMX file: C:\Users\jjvij\git\PROG5\PROG5\PROG5\DatabaseModel\DatabaseModel.edmx
+-- Date Created: 10/25/2017 16:57:30
+-- Generated from EDMX file: C:\Users\jjvij\git\PROG5\PROG5\PROG5.Entities\Entities.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -51,7 +51,7 @@ GO
 -- Creating table 'NinjaSet'
 CREATE TABLE [dbo].[NinjaSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Gold] nvarchar(max)  NOT NULL,
+    [Gold] int  NOT NULL,
     [NinjaEquipment_Id] int  NOT NULL
 );
 GO

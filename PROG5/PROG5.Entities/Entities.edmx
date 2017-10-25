@@ -120,7 +120,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="NinjaEquipment" Relationship="DatabaseModel.NinjaNinjaEquipment" FromRole="Ninja" ToRole="NinjaEquipment" />
-          <Property Name="Gold" Type="String" Nullable="false" />
+          <Property Name="Gold" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>

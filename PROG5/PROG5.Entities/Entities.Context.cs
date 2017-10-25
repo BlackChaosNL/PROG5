@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PROG5.DatabaseModel
+namespace PROG5.Entities
 {
     using System;
     using System.Data.Entity;

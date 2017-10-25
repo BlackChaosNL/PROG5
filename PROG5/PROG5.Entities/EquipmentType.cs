@@ -7,28 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PROG5.DatabaseModel
+namespace PROG5.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class EquipmentType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Equipment()
+        public EquipmentType()
         {
-            this.NinjaEquipment = new HashSet<NinjaEquipment>();
+            this.Equipment = new HashSet<Equipment>();
         }
     
         public int Id { get; set; }
-        public int Int { get; set; }
-        public int Str { get; set; }
-        public int Agi { get; set; }
-        public int Gold { get; set; }
-        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NinjaEquipment> NinjaEquipment { get; set; }
-        public virtual EquipmentType EquipmentType { get; set; }
+        public virtual ICollection<Equipment> Equipment { get; set; }
     }
 }

@@ -17,31 +17,28 @@ using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using PROG5.Repository.Interfaces;
 using PROG5.Repository.Repos;
+using PROG5.Entities;
 
 namespace PROG5.ViewModel
 {
-    /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
-    /// </summary>
     public class ViewModelLocator
     {
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
+            // Register the Entities in our program, we love us some domain specific classes.
+            SimpleIoc.Default.Register<PROG5Entities>();
+            // Set some repositories for data access.
             SimpleIoc.Default.Register<INinjaRepository, NinjaRepository>();
-
-            SimpleIoc.Default.Register<MainViewModel>();
+            // Add the VMs, we love some virtual machines.
+            SimpleIoc.Default.Register<NinjaViewModel>();
         }
 
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public NinjaViewModel Main => ServiceLocator.Current.GetInstance<NinjaViewModel>();
 
         public static void Cleanup()
         {
+            SimpleIoc.Default.Unregister<INinjaRepository>();
         }
     }
 }

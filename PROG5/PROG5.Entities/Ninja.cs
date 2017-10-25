@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PROG5.DatabaseModel
+namespace PROG5.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace PROG5.DatabaseModel
     public partial class Ninja
     {
         public int Id { get; set; }
-        public string Gold { get; set; }
+        public int Gold { get; set; }
     
         public virtual NinjaEquipment NinjaEquipment { get; set; }
     }

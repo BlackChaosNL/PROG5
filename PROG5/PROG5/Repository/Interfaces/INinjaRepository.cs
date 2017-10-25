@@ -1,15 +1,8 @@
-﻿using PROG5.DatabaseModel;
+﻿using PROG5.ViewModel;
 
 namespace PROG5.Repository.Interfaces
 {
-    public interface INinjaRepository
+    public interface INinjaRepository : IBaseInterface<NinjaViewModel>
     {
-        Ninja get(int id);
-        Ninja[] getAll();
-        void add();
-        void update(int id, Ninja ninja); 
-        void delete();
-        void deleteAll();
-
     }
 }

@@ -1,40 +1,28 @@
-﻿using System.Net.NetworkInformation;
-using PROG5.DatabaseModel;
+﻿using System.Collections.ObjectModel;
+using PROG5.Entities;
 using PROG5.Repository.Interfaces;
+using PROG5.ViewModel;
 
 namespace PROG5.Repository.Repos
 {
     public class NinjaRepository : INinjaRepository
     {
-        public Ninja get(int id)
-        {
-            using (var context = new Ninja())
-            {
-                
-            }
-        }
-
-        public Ninja[] getAll()
+        public ObservableCollection<NinjaViewModel> GetAll()
         {
             throw new System.NotImplementedException();
         }
 
-        public void add()
+        public bool Add(NinjaViewModel item)
         {
             throw new System.NotImplementedException();
         }
 
-        public void update(int id, Ninja ninja)
+        public bool Delete(NinjaViewModel item)
         {
             throw new System.NotImplementedException();
         }
 
-        public void delete()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void deleteAll()
+        public bool Update(NinjaViewModel item)
         {
             throw new System.NotImplementedException();
         }
