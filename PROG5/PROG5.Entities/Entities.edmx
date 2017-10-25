@@ -29,7 +29,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Gold" Type="int" Nullable="false" />
-    <Property Name="NinjaEquipment_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="EquipmentSet">
     <Key>
@@ -48,7 +47,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Equipment_Id" Type="int" Nullable="false" />
+    <Property Name="Ninja_Id" Type="int" Nullable="true" />
+    <Property Name="Equipment_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="EquipmentTypeSet">
     <Key>
@@ -58,19 +58,19 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="NinjaNinjaEquipment">
-    <End Role="Ninja" Type="DatabaseModel.Store.NinjaSet" Multiplicity="*" />
-    <End Role="NinjaEquipment" Type="DatabaseModel.Store.NinjaEquipmentSet" Multiplicity="1" />
+    <End Role="Ninja" Type="DatabaseModel.Store.NinjaSet" Multiplicity="0..1" />
+    <End Role="NinjaEquipment" Type="DatabaseModel.Store.NinjaEquipmentSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="NinjaEquipment">
+      <Principal Role="Ninja">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Ninja">
-        <PropertyRef Name="NinjaEquipment_Id" />
+      <Dependent Role="NinjaEquipment">
+        <PropertyRef Name="Ninja_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="EquipmentNinjaEquipment">
-    <End Role="Equipment" Type="DatabaseModel.Store.EquipmentSet" Multiplicity="1" />
+    <End Role="Equipment" Type="DatabaseModel.Store.EquipmentSet" Multiplicity="0..1" />
     <End Role="NinjaEquipment" Type="DatabaseModel.Store.NinjaEquipmentSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Equipment">
@@ -145,11 +145,11 @@
           <NavigationProperty Name="Equipment" Relationship="DatabaseModel.EquipmentNinjaEquipment" FromRole="NinjaEquipment" ToRole="Equipment" />
         </EntityType>
         <Association Name="NinjaNinjaEquipment">
-          <End Type="DatabaseModel.Ninja" Role="Ninja" Multiplicity="1" />
+          <End Type="DatabaseModel.Ninja" Role="Ninja" Multiplicity="0..1" />
           <End Type="DatabaseModel.NinjaEquipment" Role="NinjaEquipment" Multiplicity="*" />
         </Association>
         <Association Name="EquipmentNinjaEquipment">
-          <End Type="DatabaseModel.Equipment" Role="Equipment" Multiplicity="1" />
+          <End Type="DatabaseModel.Equipment" Role="Equipment" Multiplicity="0..1" />
           <End Type="DatabaseModel.NinjaEquipment" Role="NinjaEquipment" Multiplicity="*" />
         </Association>
         <EntityType Name="EquipmentType">
@@ -205,13 +205,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="NinjaNinjaEquipment" TypeName="DatabaseModel.NinjaNinjaEquipment" StoreEntitySet="NinjaSet">
-      <EndProperty Name="NinjaEquipment">
-        <ScalarProperty Name="Id" ColumnName="NinjaEquipment_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="NinjaNinjaEquipment" TypeName="DatabaseModel.NinjaNinjaEquipment" StoreEntitySet="NinjaEquipmentSet">
       <EndProperty Name="Ninja">
+        <ScalarProperty Name="Id" ColumnName="Ninja_Id" />
+      </EndProperty>
+      <EndProperty Name="NinjaEquipment">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Ninja_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="EquipmentNinjaEquipment" TypeName="DatabaseModel.EquipmentNinjaEquipment" StoreEntitySet="NinjaEquipmentSet">
       <EndProperty Name="Equipment">
@@ -220,6 +221,7 @@
       <EndProperty Name="NinjaEquipment">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Equipment_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="EquipmentTypeEquipment" TypeName="DatabaseModel.EquipmentTypeEquipment" StoreEntitySet="EquipmentSet">
       <EndProperty Name="EquipmentType">
