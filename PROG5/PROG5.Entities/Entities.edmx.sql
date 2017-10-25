@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/25/2017 16:57:30
+-- Date Created: 10/25/2017 17:14:30
 -- Generated from EDMX file: C:\Users\jjvij\git\PROG5\PROG5\PROG5.Entities\Entities.edmx
 -- --------------------------------------------------
 
@@ -77,7 +77,8 @@ GO
 
 -- Creating table 'EquipmentTypeSet'
 CREATE TABLE [dbo].[EquipmentTypeSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 

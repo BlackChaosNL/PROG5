@@ -14,9 +14,16 @@ namespace PROG5.Entities
     
     public partial class Ninja
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Ninja()
+        {
+            this.NinjaEquipment = new HashSet<NinjaEquipment>();
+        }
+    
         public int Id { get; set; }
         public int Gold { get; set; }
     
-        public virtual NinjaEquipment NinjaEquipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NinjaEquipment> NinjaEquipment { get; set; }
     }
 }

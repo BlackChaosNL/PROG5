@@ -28,7 +28,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Gold" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gold" Type="int" Nullable="false" />
     <Property Name="NinjaEquipment_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="EquipmentSet">
@@ -55,6 +55,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="NinjaNinjaEquipment">
     <End Role="Ninja" Type="DatabaseModel.Store.NinjaSet" Multiplicity="*" />
@@ -145,7 +146,7 @@
         </EntityType>
         <Association Name="NinjaNinjaEquipment">
           <End Type="DatabaseModel.Ninja" Role="Ninja" Multiplicity="1" />
-          <End Type="DatabaseModel.NinjaEquipment" Role="NinjaEquipment" Multiplicity="1" />
+          <End Type="DatabaseModel.NinjaEquipment" Role="NinjaEquipment" Multiplicity="*" />
         </Association>
         <Association Name="EquipmentNinjaEquipment">
           <End Type="DatabaseModel.Equipment" Role="Equipment" Multiplicity="1" />
@@ -157,6 +158,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Equipment" Relationship="DatabaseModel.EquipmentTypeEquipment" FromRole="EquipmentType" ToRole="Equipment" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="EquipmentTypeEquipment">
           <End Type="DatabaseModel.EquipmentType" Role="EquipmentType" Multiplicity="1" />
@@ -199,6 +201,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.EquipmentType)">
         <MappingFragment StoreEntitySet="EquipmentTypeSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
