@@ -79,6 +79,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Repository\Interfaces\IBaseInterface.cs" />
+    <Compile Include="Repository\Interfaces\IEquipmentRepository.cs" />
+    <Compile Include="Repository\Interfaces\IEquipmentTypeRepository.cs" />
+    <Compile Include="Repository\Interfaces\INinjaEquipmentRepository.cs" />
     <Compile Include="Repository\Interfaces\INinjaRepository.cs" />
     <Compile Include="Repository\Repos\NinjaRepository.cs" />
     <Compile Include="ViewModel\EquipmentTypeViewModel.cs" />

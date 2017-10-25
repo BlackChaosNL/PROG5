@@ -22,6 +22,7 @@ namespace PROG5.Entities
     
         public int Id { get; set; }
         public int Gold { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NinjaEquipment> NinjaEquipment { get; set; }

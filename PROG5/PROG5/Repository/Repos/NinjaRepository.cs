@@ -15,7 +15,11 @@ namespace PROG5.Repository.Repos
             {
                 foreach (var ninja in ctx.NinjaSet)
                 {
-                    ninjas.Add(new NinjaViewModel() { Id = ninja.Id, Gold = ninja.Gold });
+                    ninjas.Add(new NinjaViewModel(){
+                        Id = ninja.Id,
+                        Gold = ninja.Gold,
+                        Name = ninja.Name
+                    });
                 }
             }
             return ninjas;
@@ -23,7 +27,14 @@ namespace PROG5.Repository.Repos
 
         public bool Add(NinjaViewModel item)
         {
-            throw new System.NotImplementedException();
+            using (var ctx = new DatabaseModelContainer())
+            {
+                ctx.NinjaSet.Add(new Ninja(){
+                    Gold = item.Gold,
+                    Name = item.Name
+                });
+            }
+            return true;
         }
 
         public bool Delete(NinjaViewModel item)

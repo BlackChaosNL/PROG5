@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/25/2017 20:28:53
+-- Date Created: 10/25/2017 21:39:55
 -- Generated from EDMX file: C:\Users\jjvij\git\PROG5\PROG5\PROG5.Entities\Entities.edmx
 -- --------------------------------------------------
 
@@ -18,7 +18,7 @@ GO
 -- --------------------------------------------------
 
 IF OBJECT_ID(N'[dbo].[FK_NinjaNinjaEquipment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[NinjaSet] DROP CONSTRAINT [FK_NinjaNinjaEquipment];
+    ALTER TABLE [dbo].[NinjaEquipmentSet] DROP CONSTRAINT [FK_NinjaNinjaEquipment];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EquipmentNinjaEquipment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NinjaEquipmentSet] DROP CONSTRAINT [FK_EquipmentNinjaEquipment];
@@ -51,7 +51,8 @@ GO
 -- Creating table 'NinjaSet'
 CREATE TABLE [dbo].[NinjaSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Gold] int  NOT NULL
+    [Gold] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 

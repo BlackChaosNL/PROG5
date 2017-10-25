@@ -29,6 +29,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Gold" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="EquipmentSet">
     <Key>
@@ -122,6 +123,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="NinjaEquipment" Relationship="DatabaseModel.NinjaNinjaEquipment" FromRole="Ninja" ToRole="NinjaEquipment" />
           <Property Name="Gold" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -175,6 +177,7 @@
         <MappingFragment StoreEntitySet="NinjaSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

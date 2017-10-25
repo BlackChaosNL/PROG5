@@ -5,12 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="507.673" ResizeMode="NoResize"
+        Title="MainWindow" Height="354.62" Width="511.138" ResizeMode="NoResize"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid Margin="0,0,2,0">
         <Button Content="Add Ninja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="10,10,0,0" Height="35" />
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="102" Height="35"/>
-        <ListBox HorizontalAlignment="Left" Height="299" Margin="117,10,0,0" VerticalAlignment="Top" Width="185" ItemsSource="{ Binding NinjaCollection }"/>
+        <Button Content="Remove Ninja" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="102" Height="35" />
+        <Button Content="Shop for Ninja" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="102" Height="35" />
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top" Width="102" Height="35" />
+        <ListBox HorizontalAlignment="Left" 
+                 Height="299" 
+                 Margin="117,10,0,0" 
+                 VerticalAlignment="Top" 
+                 Width="185" 
+                 ItemsSource="{ Binding NinjaCollection }"
+                 SelectedItem="{Binding Path=SelectedNinja, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Name:" />
+                        <TextBox Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="301" Margin="307,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="183"/>
+        <Label Content="Statistics" HorizontalAlignment="Left" Margin="371,10,0,0" VerticalAlignment="Top"/>
+        <Separator HorizontalAlignment="Left" Height="20" Margin="307,30,0,0" VerticalAlignment="Top" Width="183"/>
+        <Label Content="Intelligence" HorizontalAlignment="Left" Margin="363,44,0,0" VerticalAlignment="Top"/>
+        <Label Content="Strength" HorizontalAlignment="Left" Margin="372,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="Agility" HorizontalAlignment="Left" Margin="378,158,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="340,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True"/>
+        <TextBox Height="23" Margin="340,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True"/>
+        <TextBox Height="23" Margin="340,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True"/>
+        <Separator HorizontalAlignment="Left" Height="20" Margin="340,113,0,0" VerticalAlignment="Top" Width="120"/>
+        <Separator HorizontalAlignment="Left" Height="20" Margin="340,56,0,0" VerticalAlignment="Top" Width="120"/>
+        <Separator HorizontalAlignment="Left" Height="20" Margin="340,172,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
