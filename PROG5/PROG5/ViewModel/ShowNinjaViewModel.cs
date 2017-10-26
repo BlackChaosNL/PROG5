@@ -12,6 +12,7 @@ namespace PROG5.ViewModel
         public ICommand Close { get; set; }
         public ICommand CreateNinja { get; set; }
         public ICommand DeleteNinja { get; set; }
+        public ICommand ShopForNinja { get; set; }
         public int SelectedNinjaAgility { get; set; }
         public int SelectedNinjaIntelligence { get; set; }
         public int SelectedNinjaStrength { get; set; }
@@ -26,6 +27,7 @@ namespace PROG5.ViewModel
             Close = new RelayCommand(App.CloseWindow);
             CreateNinja = new RelayCommand(AddNinja);
             DeleteNinja = new RelayCommand(RemoveNinja);
+            ShopForNinja = new RelayCommand(ShopNinja);
             SelectedNinjaAgility = 0;
             SelectedNinjaIntelligence = 0;
             SelectedNinjaStrength = 0;
@@ -38,6 +40,11 @@ namespace PROG5.ViewModel
         }
 
         public void RemoveNinja()
+        {
+            
+        }
+
+        public void ShopNinja()
         {
             
         }

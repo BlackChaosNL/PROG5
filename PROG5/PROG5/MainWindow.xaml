@@ -14,11 +14,13 @@
     </Window.Resources>
     <Grid Margin="0,0,2,0">
         <Button Content="Add Ninja" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                Width="102" Margin="10,10,0,0" Height="35" />
+                Width="102" Margin="10,10,0,0" Height="35" Command="{Binding CreateNinja}" />
         <Button Content="Remove Ninja" HorizontalAlignment="Left" 
-                Margin="10,50,0,0" VerticalAlignment="Top" Width="102" Height="35" />
-        <Button Content="Shop for Ninja" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="102" Height="35" />
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top" Width="102" Height="35" Command="{Binding Close}" />
+                Margin="10,50,0,0" VerticalAlignment="Top" Width="102" Height="35" Command="{Binding DeleteNinja}"/>
+        <Button Content="Shop for Ninja" HorizontalAlignment="Left" Margin="10,90,0,0" 
+                VerticalAlignment="Top" Width="102" Height="35" Command="{Binding ShopForNinja}"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="10,274,0,0" 
+                VerticalAlignment="Top" Width="102" Height="35" Command="{Binding Close}" />
         <ListBox HorizontalAlignment="Left" 
                  Height="299" 
                  Margin="117,10,0,0" 
