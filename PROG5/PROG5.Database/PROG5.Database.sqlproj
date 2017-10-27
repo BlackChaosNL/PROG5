@@ -23,7 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultSchema>prog5</DefaultSchema>
+    <DefaultSchema>dbo</DefaultSchema>
     <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
     <GenerateCreateScript>True</GenerateCreateScript>
   </PropertyGroup>
@@ -66,5 +66,6 @@
     <Build Include="NinjaEquipment.sql" />
     <Build Include="Equipment.sql" />
     <Build Include="EquipmentType.sql" />
+    <Build Include="prog5.NinjaSet.sql" />
   </ItemGroup>
 </Project>
