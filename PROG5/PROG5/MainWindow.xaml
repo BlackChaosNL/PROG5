@@ -6,12 +6,21 @@
         xmlns:local="clr-namespace:PROG5"
         mc:Ignorable="d"
         Title="MainWindow" Height="354.62" Width="511.138" ResizeMode="NoResize"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System">
+
+    <Window.Resources>
+       <componentModel:BooleanConverter x:Key="BooleanConverter" />
+    </Window.Resources>
     <Grid Margin="0,0,2,0">
-        <Button Content="Add Ninja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="10,10,0,0" Height="35" />
-        <Button Content="Remove Ninja" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="102" Height="35" />
-        <Button Content="Shop for Ninja" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="102" Height="35" />
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top" Width="102" Height="35" />
+        <Button Content="Add Ninja" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Width="102" Margin="10,10,0,0" Height="35" Command="{Binding CreateNinja}" />
+        <Button Content="Remove Ninja" HorizontalAlignment="Left" 
+                Margin="10,50,0,0" VerticalAlignment="Top" Width="102" Height="35" Command="{Binding DeleteNinja}"/>
+        <Button Content="Shop for Ninja" HorizontalAlignment="Left" Margin="10,90,0,0" 
+                VerticalAlignment="Top" Width="102" Height="35" Command="{Binding ShopForNinja}"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="10,274,0,0" 
+                VerticalAlignment="Top" Width="102" Height="35" Command="{Binding Close}" />
         <ListBox HorizontalAlignment="Left" 
                  Height="299" 
                  Margin="117,10,0,0" 
@@ -34,15 +43,18 @@
         <Label Content="Intelligence" HorizontalAlignment="Left" Margin="363,44,0,0" VerticalAlignment="Top"/>
         <Label Content="Strength" HorizontalAlignment="Left" Margin="372,100,0,0" VerticalAlignment="Top"/>
         <Label Content="Agility" HorizontalAlignment="Left" Margin="378,158,0,0" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="340,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True"/>
-        <TextBox Height="23" Margin="340,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True"/>
-        <TextBox Height="23" Margin="340,186,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True"/>
+        <TextBox Height="23" Margin="340,71,0,0" TextWrapping="Wrap" Text="{Binding SelectedNinjaIntelligence, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+                 HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
+        <TextBox Height="23" Margin="340,128,0,0" TextWrapping="Wrap" Text="{Binding SelectedNinjaStrength, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+                 HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
+        <TextBox Height="23" Margin="340,186,0,0" TextWrapping="Wrap" Text="{Binding SelectedNinjaAgility, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+                 HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
         <Separator HorizontalAlignment="Left" Height="20" Margin="340,113,0,0" VerticalAlignment="Top" Width="120"/>
         <Separator HorizontalAlignment="Left" Height="20" Margin="340,56,0,0" VerticalAlignment="Top" Width="120"/>
         <Separator HorizontalAlignment="Left" Height="20" Margin="340,172,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Height="23" Margin="340,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True"/>
+        <TextBox Height="23" Margin="340,244,0,0" TextWrapping="Wrap" Text="{Binding SelectedNinjaRemainingGold, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+                 HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
         <Separator HorizontalAlignment="Left" Height="20" Margin="340,229,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Remaining Gold" HorizontalAlignment="Left" Margin="353,214,0,0" VerticalAlignment="Top"/>
-
     </Grid>
 </Window>

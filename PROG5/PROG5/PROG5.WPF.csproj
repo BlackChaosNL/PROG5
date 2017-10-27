@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Repository\Interfaces\IBaseInterface.cs" />
     <Compile Include="Repository\Interfaces\IEquipmentRepository.cs" />
     <Compile Include="Repository\Interfaces\IEquipmentTypeRepository.cs" />

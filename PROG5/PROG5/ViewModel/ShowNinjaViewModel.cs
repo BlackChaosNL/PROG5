@@ -1,13 +1,22 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using PROG5.Repository.Interfaces;
 
 namespace PROG5.ViewModel
 {
     public class ShowNinjaViewModel : ViewModelBase
     {
-        public new event PropertyChangedEventHandler PropertyChanged;
+        public ICommand Close { get; set; }
+        public ICommand CreateNinja { get; set; }
+        public ICommand DeleteNinja { get; set; }
+        public ICommand ShopForNinja { get; set; }
+        public int SelectedNinjaAgility { get; set; }
+        public int SelectedNinjaIntelligence { get; set; }
+        public int SelectedNinjaStrength { get; set; }
+        public int SelectedNinjaRemainingGold { get; set; }
         public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
 
         public string SelectedNinja { get; set; }
@@ -15,12 +24,29 @@ namespace PROG5.ViewModel
         public ShowNinjaViewModel(INinjaRepository ninjas)
         {
             NinjaCollection = ninjas.GetAll();
+            Close = new RelayCommand(App.CloseWindow);
+            CreateNinja = new RelayCommand(AddNinja);
+            DeleteNinja = new RelayCommand(RemoveNinja);
+            ShopForNinja = new RelayCommand(ShopNinja);
+            SelectedNinjaAgility = 0;
+            SelectedNinjaIntelligence = 0;
+            SelectedNinjaStrength = 0;
+            SelectedNinjaRemainingGold = 0;
         }
 
-        protected void OnPropertyChanged(string name)
+        public void AddNinja()
         {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(name));
+            
+        }
+
+        public void RemoveNinja()
+        {
+            
+        }
+
+        public void ShopNinja()
+        {
+            
         }
     }
 }
