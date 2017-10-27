@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{170546cf-3bbb-4395-bc8a-89671d3f79b8}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -23,6 +23,9 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultSchema>prog5</DefaultSchema>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+    <GenerateCreateScript>True</GenerateCreateScript>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
