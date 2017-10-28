@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -18,13 +19,13 @@ namespace PROG5.ViewModel
         public int SelectedNinjaStrength { get; set; }
         public int SelectedNinjaRemainingGold { get; set; }
         public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
-        private INinjaRepository ninjaRepository;
+        private readonly INinjaRepository _ninjaRepository;
 
-        public string SelectedNinja { get; set; }
+        public NinjaViewModel SelectedNinja { get; set; }
 
         public ShowNinjaViewModel(INinjaRepository ninjas)
         {
-            ninjaRepository = ninjas;
+            _ninjaRepository = ninjas;
             NinjaCollection = ninjas.GetAll();
             Close = new RelayCommand(App.CloseWindow);
             CreateNinja = new RelayCommand(AddNinja);
@@ -38,19 +39,22 @@ namespace PROG5.ViewModel
 
         public void AddNinja()
         {
-            NinjaViewModel ninja = new NinjaViewModel();
+            var ninja = new NinjaViewModel() {Gold = 5000, Name = "Jeroen"};
 
-            if (ninjaRepository.Add(ninja))
-            {
-                NinjaCollection.Add(item: ninja);
+            if (!_ninjaRepository.Add(ninja)) return;
+            NinjaCollection.Add(ninja);
 
-                System.Console.Out.WriteLine("Ninja added");
-            } 
+            System.Console.Out.WriteLine("Ninja added");
         }
 
         public void RemoveNinja()
         {
-            
+            //WIP
+            var ninja = _ninjaRepository.GetAll().First(o => o == SelectedNinja);
+            if (_ninjaRepository.Delete(ninja))
+            {
+                NinjaCollection.Remove(ninja);
+            }
         }
 
         public void ShopNinja()

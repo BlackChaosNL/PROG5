@@ -66,6 +66,5 @@
     <Build Include="NinjaEquipment.sql" />
     <Build Include="Equipment.sql" />
     <Build Include="EquipmentType.sql" />
-    <Build Include="prog5.NinjaSet.sql" />
   </ItemGroup>
 </Project>
