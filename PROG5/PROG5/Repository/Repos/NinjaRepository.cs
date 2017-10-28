@@ -56,7 +56,16 @@ namespace PROG5.Repository.Repos
 
         public bool Update(NinjaViewModel item)
         {
-            throw new System.NotImplementedException();
+            using (var ctx = new DatabaseModelContainer())
+            {
+                var i = GetAll().First(o => o.Id == item.Id);
+                if (i == null) return false;
+                var ninja = ctx.NinjaSet.Find(new Ninja() {Id = item.Id});
+                ninja.Gold = item.Gold;
+                ninja.Name = item.Name;
+                ctx.SaveChanges();
+                return true;
+            }
         }
     }
 }
