@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using PROG5.Repository.Interfaces;
+using PROG5.View;
 
 namespace PROG5.ViewModel
 {
@@ -55,7 +56,10 @@ namespace PROG5.ViewModel
 
         public void ShopNinja()
         {
-            
+            var shop = new Shop();
+            (App.Current.MainWindow).Close();
+            App.Current.MainWindow = shop;
+            shop.Show();
         }
     }
 }

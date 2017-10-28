@@ -30,15 +30,18 @@ namespace PROG5.ViewModel
             SimpleIoc.Default.Register<DatabaseModelContainer>();
             // Set some repositories for data access.
             SimpleIoc.Default.Register<INinjaRepository, NinjaRepository>();
+            SimpleIoc.Default.Register<IEquipmentTypeRepository, EquipmentTypeRepository>();
             // Add the VMs, we love some virtual machines.
             SimpleIoc.Default.Register<NinjaViewModel>();
             SimpleIoc.Default.Register<ShowNinjaViewModel>();
+            SimpleIoc.Default.Register<ShopViewModel>();
             SimpleIoc.Default.Register<NinjaEquipmentViewModel>();
             SimpleIoc.Default.Register<EquipmentTypeViewModel>();
             SimpleIoc.Default.Register<EquipmentViewModel>();
         }
 
         public ShowNinjaViewModel Main => ServiceLocator.Current.GetInstance<ShowNinjaViewModel>();
+        public ShopViewModel Shop => ServiceLocator.Current.GetInstance<ShopViewModel>();
 
         public static void Cleanup()
         {
