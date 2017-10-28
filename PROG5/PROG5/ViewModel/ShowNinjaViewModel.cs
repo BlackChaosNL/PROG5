@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -20,7 +21,6 @@ namespace PROG5.ViewModel
         public int SelectedNinjaRemainingGold { get; set; }
         public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
         private readonly INinjaRepository _ninjaRepository;
-
         public NinjaViewModel SelectedNinja { get; set; }
 
         public ShowNinjaViewModel(INinjaRepository ninjas)
@@ -46,12 +46,11 @@ namespace PROG5.ViewModel
 
         public void RemoveNinja()
         {
-            //WIP
-            var ninja = _ninjaRepository.GetAll().First(o => o.Id == SelectedNinja.Id);
+            var ninja = _ninjaRepository.GetAll().First(o => o.Name == SelectedNinja.Name);
             if (_ninjaRepository.Delete(ninja))
             {
-                NinjaCollection.Remove(ninja);
-            }
+                NinjaCollection.Remove(NinjaCollection.First(o => o.Id == SelectedNinja.Id));
+            };
         }
 
         public void ShopNinja()

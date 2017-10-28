@@ -31,8 +31,6 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
-                var i = GetAll().First(o => o.Name == item.Name);
-                if (i != null) return false;
                 ctx.NinjaSet.Add(new Ninja(){
                     Gold = item.Gold,
                     Name = item.Name
@@ -46,9 +44,7 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
-                var i = GetAll().First(o => o.Id == item.Id);
-                if (i == null) return false;
-                ctx.NinjaSet.Remove(new Ninja() { Id = item.Id });
+                ctx.NinjaSet.Remove(ctx.NinjaSet.Find(item.Id) ?? new Ninja());
                 ctx.SaveChanges();
                 return true;
             }
@@ -58,8 +54,6 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
-                var i = GetAll().First(o => o.Id == item.Id);
-                if (i == null) return false;
                 var ninja = ctx.NinjaSet.Find(new Ninja() {Id = item.Id});
                 ninja.Gold = item.Gold;
                 ninja.Name = item.Name;
