@@ -18,11 +18,13 @@ namespace PROG5.ViewModel
         public int SelectedNinjaStrength { get; set; }
         public int SelectedNinjaRemainingGold { get; set; }
         public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
+        private INinjaRepository ninjaRepository;
 
         public string SelectedNinja { get; set; }
 
         public ShowNinjaViewModel(INinjaRepository ninjas)
         {
+            ninjaRepository = ninjas;
             NinjaCollection = ninjas.GetAll();
             Close = new RelayCommand(App.CloseWindow);
             CreateNinja = new RelayCommand(AddNinja);
@@ -36,7 +38,14 @@ namespace PROG5.ViewModel
 
         public void AddNinja()
         {
-            
+            NinjaViewModel ninja = new NinjaViewModel();
+
+            if (ninjaRepository.Add(ninja))
+            {
+                NinjaCollection.Add(item: ninja);
+
+                System.Console.Out.WriteLine("Ninja added");
+            } 
         }
 
         public void RemoveNinja()

@@ -21,6 +21,7 @@ namespace PROG5.Repository.Repos
                         Name = ninja.Name
                     });
                 }
+
             }
             return ninjas;
         }
@@ -33,7 +34,10 @@ namespace PROG5.Repository.Repos
                     Gold = item.Gold,
                     Name = item.Name
                 });
+
+                ctx.SaveChanges();
             }
+
             return true;
         }
 
