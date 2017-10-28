@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.NetworkInformation;
 using PROG5.Entities;
 using PROG5.Repository.Interfaces;
@@ -30,20 +31,27 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
+                var i = GetAll().First(o => o.Name == item.Name);
+                if (i != null) return false;
                 ctx.NinjaSet.Add(new Ninja(){
                     Gold = item.Gold,
                     Name = item.Name
                 });
-
                 ctx.SaveChanges();
+                return true;
             }
-
-            return true;
         }
 
         public bool Delete(NinjaViewModel item)
         {
-            throw new System.NotImplementedException();
+            using (var ctx = new DatabaseModelContainer())
+            {
+                var i = GetAll().First(o => o.Id == item.Id);
+                if (i == null) return false;
+                ctx.NinjaSet.Remove(new Ninja() { Id = item.Id });
+                ctx.SaveChanges();
+                return true;
+            }
         }
 
         public bool Update(NinjaViewModel item)

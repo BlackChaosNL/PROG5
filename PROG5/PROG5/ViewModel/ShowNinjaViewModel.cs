@@ -40,17 +40,14 @@ namespace PROG5.ViewModel
         public void AddNinja()
         {
             var ninja = new NinjaViewModel() {Gold = 5000, Name = "Jeroen"};
-
             if (!_ninjaRepository.Add(ninja)) return;
             NinjaCollection.Add(ninja);
-
-            System.Console.Out.WriteLine("Ninja added");
         }
 
         public void RemoveNinja()
         {
             //WIP
-            var ninja = _ninjaRepository.GetAll().First(o => o == SelectedNinja);
+            var ninja = _ninjaRepository.GetAll().First(o => o.Id == SelectedNinja.Id);
             if (_ninjaRepository.Delete(ninja))
             {
                 NinjaCollection.Remove(ninja);
