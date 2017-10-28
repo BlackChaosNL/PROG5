@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="354.62" Width="511.138" ResizeMode="NoResize"
+        Title="Ninja Manager" Height="354.62" Width="511.138" ResizeMode="NoResize"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System">
 
