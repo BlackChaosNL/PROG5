@@ -96,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\AddNinjaController.cs" />
+    <Compile Include="Windows\AddNinjaWindow.xaml.cs">
+      <DependentUpon>AddNinjaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Repository\Interfaces\IBaseInterface.cs" />
     <Compile Include="Repository\Interfaces\IEquipmentRepository.cs" />
@@ -109,6 +113,10 @@
     <Compile Include="ViewModel\NinjaViewModel.cs" />
     <Compile Include="ViewModel\ShowNinjaViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Windows\AddNinjaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
