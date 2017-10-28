@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -6,6 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using PROG5.Repository.Interfaces;
 using PROG5.Controllers;
+using PROG5.View;
 
 namespace PROG5.ViewModel
 {
@@ -53,23 +55,23 @@ namespace PROG5.ViewModel
             if (!_ninjaRepository.Add(ninja)) return;
 
             NinjaCollection.Add(ninja);
-
-            System.Console.Out.WriteLine("Ninja added");
         }
 
         public void RemoveNinja()
         {
-            //WIP
-            var ninja = _ninjaRepository.GetAll().First(o => o == SelectedNinja);
+            var ninja = _ninjaRepository.GetAll().First(o => o.Name == SelectedNinja.Name);
             if (_ninjaRepository.Delete(ninja))
             {
-                NinjaCollection.Remove(ninja);
-            }
+                NinjaCollection.Remove(NinjaCollection.First(o => o.Id == SelectedNinja.Id));
+            };
         }
 
         public void ShopNinja()
         {
-            
+            var shop = new Shop();
+            (App.Current.MainWindow).Close();
+            App.Current.MainWindow = shop;
+            shop.Show();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.NetworkInformation;
 using PROG5.Entities;
 using PROG5.Repository.Interfaces;
@@ -34,21 +35,31 @@ namespace PROG5.Repository.Repos
                     Gold = item.Gold,
                     Name = item.Name
                 });
-
                 ctx.SaveChanges();
+                return true;
             }
-
-            return true;
         }
 
         public bool Delete(NinjaViewModel item)
         {
-            throw new System.NotImplementedException();
+            using (var ctx = new DatabaseModelContainer())
+            {
+                ctx.NinjaSet.Remove(ctx.NinjaSet.Find(item.Id) ?? new Ninja());
+                ctx.SaveChanges();
+                return true;
+            }
         }
 
         public bool Update(NinjaViewModel item)
         {
-            throw new System.NotImplementedException();
+            using (var ctx = new DatabaseModelContainer())
+            {
+                var ninja = ctx.NinjaSet.Find(new Ninja() {Id = item.Id});
+                ninja.Gold = item.Gold;
+                ninja.Name = item.Name;
+                ctx.SaveChanges();
+                return true;
+            }
         }
     }
 }

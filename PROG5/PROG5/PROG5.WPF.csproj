@@ -106,11 +106,13 @@
     <Compile Include="Repository\Interfaces\IEquipmentTypeRepository.cs" />
     <Compile Include="Repository\Interfaces\INinjaEquipmentRepository.cs" />
     <Compile Include="Repository\Interfaces\INinjaRepository.cs" />
+    <Compile Include="Repository\Repos\EquipmentTypeRepository.cs" />
     <Compile Include="Repository\Repos\NinjaRepository.cs" />
     <Compile Include="ViewModel\EquipmentTypeViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\NinjaEquipmentViewModel.cs" />
     <Compile Include="ViewModel\NinjaViewModel.cs" />
+    <Compile Include="ViewModel\ShopViewModel.cs" />
     <Compile Include="ViewModel\ShowNinjaViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Windows\AddNinjaWindow.xaml">
@@ -118,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
+    <Compile Include="View\Shop.xaml.cs">
+      <DependentUpon>Shop.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\Ninjas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -125,10 +131,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\Ninjas.xaml.cs">
+      <DependentUpon>Ninjas.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Shop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -157,9 +167,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
