@@ -40,10 +40,12 @@ namespace PROG5.ViewModel
             SimpleIoc.Default.Register<NinjaEquipmentViewModel>();
             SimpleIoc.Default.Register<EquipmentTypeViewModel>();
             SimpleIoc.Default.Register<EquipmentViewModel>();
+            SimpleIoc.Default.Register<AddNinjaDialogViewModel>();
         }
 
         public ShowNinjaViewModel Main => ServiceLocator.Current.GetInstance<ShowNinjaViewModel>();
         public ShopViewModel Shop => ServiceLocator.Current.GetInstance<ShopViewModel>();
+        public AddNinjaDialogViewModel Popup => ServiceLocator.Current.GetInstance<AddNinjaDialogViewModel>();
 
         public static void Cleanup()
         {

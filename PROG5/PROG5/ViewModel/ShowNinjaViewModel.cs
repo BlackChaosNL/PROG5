@@ -17,17 +17,17 @@ namespace PROG5.ViewModel
         public ICommand CreateNinja { get; set; }
         public ICommand DeleteNinja { get; set; }
         public ICommand ShopForNinja { get; set; }
+        public NinjaViewModel SelectedNinja { get; set; }
+
         public int SelectedNinjaAgility { get; set; }
         public int SelectedNinjaIntelligence { get; set; }
         public int SelectedNinjaStrength { get; set; }
         public int SelectedNinjaRemainingGold { get; set; }
         public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
         private readonly INinjaRepository _ninjaRepository;
-        private AddNinjaController addNinjaController;
 
-        public NinjaViewModel SelectedNinja { get; set; }
 
-        public ShowNinjaViewModel(INinjaRepository ninjas)
+        public ShowNinjaViewModel(AddNinjaDialogViewModel dialog, INinjaRepository ninjas)
         {
             _ninjaRepository = ninjas;
             NinjaCollection = ninjas.GetAll();
@@ -35,7 +35,6 @@ namespace PROG5.ViewModel
             CreateNinja = new RelayCommand(AddNinja);
             DeleteNinja = new RelayCommand(RemoveNinja);
             ShopForNinja = new RelayCommand(ShopNinja);
-            addNinjaController = new AddNinjaController();
             SelectedNinjaAgility = 0;
             SelectedNinjaIntelligence = 0;
             SelectedNinjaStrength = 0;
@@ -44,17 +43,10 @@ namespace PROG5.ViewModel
 
         public void AddNinja()
         {
-            var window = new AddNinjaWindow(addNinjaController);
-
-            window.ShowDialog();
-            var ninja = new NinjaViewModel() {
-                Gold = 5000,
-                Name = "Jeroen"
-            };
-
-            if (!_ninjaRepository.Add(ninja)) return;
-
-            NinjaCollection.Add(ninja);
+            var window = new AddNinjaWindow();
+            (App.Current.MainWindow).Close();
+            App.Current.MainWindow = window;
+            window.Show();
         }
 
         public void RemoveNinja()

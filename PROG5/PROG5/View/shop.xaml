@@ -8,7 +8,7 @@
         Title="shop" Height="303.138" Width="416.108"
         DataContext="{Binding Shop, Source={StaticResource Locator}}">
     <Grid>
-        <Button Content="Exit shop" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="Exit shop" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
         <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="42" Command="{Binding ItemCommand}">
             <TextBlock Text="Item Management" TextWrapping="Wrap" Height="32" />
         </Button>

@@ -21,21 +21,9 @@ namespace PROG5
     /// </summary>
     public partial class AddNinjaWindow : Window
     {
-        public AddNinjaController controller;
-        public ICommand CloseWindow;
-
-        public AddNinjaWindow(AddNinjaController controller)
+        public AddNinjaWindow()
         {
-            this.controller = controller;
-
-            CloseWindow = new RelayCommand(CloseWindowHandler);
-
             InitializeComponent();
-        }
-
-        private void CloseWindowHandler()
-        {
-            Close();
         }
     }
 }
