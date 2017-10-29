@@ -7,7 +7,7 @@ using PROG5.ViewModel;
 
 namespace PROG5.Repository.Repos
 {
-    public class EquipmentRepository : IBaseInterface<EquipmentViewModel>
+    public class EquipmentRepository : IEquipmentRepository
     {
         public ObservableCollection<EquipmentViewModel> GetAll()
         {

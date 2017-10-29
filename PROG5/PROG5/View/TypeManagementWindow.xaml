@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG5.View"
         mc:Ignorable="d"
-        Title="Type Management Window" Height="300" Width="300">
+        Title="Type Management Window" Height="146.235" Width="198.954"
+        DataContext="{Binding Type, Source={StaticResource Locator}}">
     <Grid>
-        
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="96,82,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CloseCommand}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="19,55,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.5,0.5"  Text="{Binding NewType, Mode=TwoWay}"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="20,2,0,0" VerticalAlignment="Top" Width="151" HorizontalContentAlignment="Center"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="145,55,0,0" VerticalAlignment="Top" Width="26" Height="22" Command="{Binding AddCommand}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="20,28,0,0" VerticalAlignment="Top" 
+                  Width="120" ItemsSource="{Binding TypesCollection}" SelectedItem="{Binding SelectedType}" DisplayMemberPath="Name"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="145,28,0,0" VerticalAlignment="Top" Width="26" Height="22" Command="{Binding DeleteCommand}"/>
     </Grid>
 </Window>

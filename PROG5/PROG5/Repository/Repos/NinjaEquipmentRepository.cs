@@ -4,7 +4,7 @@ using PROG5.ViewModel;
 
 namespace PROG5.Repository.Repos
 {
-    public class NinjaEquipmentRepository : IBaseInterface<NinjaEquipmentViewModel>
+    public class NinjaEquipmentRepository : INinjaEquipmentRepository
     {
         public ObservableCollection<NinjaEquipmentViewModel> GetAll()
         {

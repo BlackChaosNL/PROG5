@@ -101,6 +101,7 @@
     <Compile Include="Repository\Repos\EquipmentRepository.cs" />
     <Compile Include="Repository\Repos\NinjaEquipmentRepository.cs" />
     <Compile Include="ViewModel\AddNinjaDialogViewModel.cs" />
+    <Compile Include="ViewModel\TypeManagementViewModel.cs" />
     <Compile Include="View\AddNinjaWindow.xaml.cs">
       <DependentUpon>AddNinjaWindow.xaml</DependentUpon>
     </Compile>
@@ -119,6 +120,12 @@
     <Compile Include="ViewModel\ShopViewModel.cs" />
     <Compile Include="ViewModel\ShowNinjaViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ItemManagementWindow.xaml.cs">
+      <DependentUpon>ItemManagementWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TypeManagementWindow.xaml.cs">
+      <DependentUpon>TypeManagementWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\AddNinjaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +133,10 @@
     <Compile Include="View\Shop.xaml.cs">
       <DependentUpon>Shop.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ItemManagementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Ninjas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,6 +150,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Shop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TypeManagementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

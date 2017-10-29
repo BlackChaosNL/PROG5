@@ -1,6 +1,8 @@
-﻿namespace PROG5.Repository.Interfaces
+﻿using PROG5.ViewModel;
+
+namespace PROG5.Repository.Interfaces
 {
-    public interface IEquipmentTypeRepository
+    public interface IEquipmentTypeRepository : IBaseInterface<EquipmentTypeViewModel>
     {
         
     }

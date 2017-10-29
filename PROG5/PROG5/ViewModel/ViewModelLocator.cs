@@ -41,11 +41,13 @@ namespace PROG5.ViewModel
             SimpleIoc.Default.Register<EquipmentTypeViewModel>();
             SimpleIoc.Default.Register<EquipmentViewModel>();
             SimpleIoc.Default.Register<AddNinjaDialogViewModel>();
+            SimpleIoc.Default.Register<TypeManagementViewModel>();
         }
 
         public ShowNinjaViewModel Main => ServiceLocator.Current.GetInstance<ShowNinjaViewModel>();
         public ShopViewModel Shop => ServiceLocator.Current.GetInstance<ShopViewModel>();
         public AddNinjaDialogViewModel Popup => ServiceLocator.Current.GetInstance<AddNinjaDialogViewModel>();
+        public TypeManagementViewModel Type => ServiceLocator.Current.GetInstance<TypeManagementViewModel>();
 
         public static void Cleanup()
         {
