@@ -25,12 +25,18 @@ namespace PROG5.ViewModel
 
         public void TypeManagementWindow()
         {
-            
+            var window = new TypeManagementWindow();
+            (App.Current.MainWindow).Close();
+            App.Current.MainWindow = window;
+            window.Show();
         }
 
         public void ItemManagementWindow()
         {
-            
+            var window = new ItemManagementWindow();
+            (App.Current.MainWindow).Close();
+            App.Current.MainWindow = window;
+            window.Show();
         }
 
         public void ClosePls()
