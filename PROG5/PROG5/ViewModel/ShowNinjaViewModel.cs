@@ -27,10 +27,10 @@ namespace PROG5.ViewModel
         private readonly INinjaRepository _ninjaRepository;
 
 
-        public ShowNinjaViewModel(AddNinjaDialogViewModel dialog, INinjaRepository ninjas)
+        public ShowNinjaViewModel(INinjaRepository ninjas)
         {
             _ninjaRepository = ninjas;
-            NinjaCollection = ninjas.GetAll();
+            UpdateCollection();
             Close = new RelayCommand(App.CloseWindow);
             CreateNinja = new RelayCommand(AddNinja);
             DeleteNinja = new RelayCommand(RemoveNinja);
@@ -56,6 +56,7 @@ namespace PROG5.ViewModel
             {
                 NinjaCollection.Remove(NinjaCollection.First(o => o.Id == SelectedNinja.Id));
             };
+            UpdateCollection();
         }
 
         public void ShopNinja()
@@ -64,6 +65,11 @@ namespace PROG5.ViewModel
             (App.Current.MainWindow).Close();
             App.Current.MainWindow = shop;
             shop.Show();
+        }
+
+        public void UpdateCollection()
+        {
+            NinjaCollection = _ninjaRepository.GetAll();
         }
     }
 }

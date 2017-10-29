@@ -13,14 +13,14 @@ namespace PROG5.ViewModel
         public string Name { get; set; }
         public int Gold { get; set; }
         public INinjaRepository NinjaRepository { get; set; }
+        public ShowNinjaViewModel Ninja { get; set; }
 
-        public AddNinjaDialogViewModel(INinjaRepository ninjaRepository) 
+        public AddNinjaDialogViewModel(INinjaRepository ninjaRepository, ShowNinjaViewModel ninja) 
         {
             NinjaRepository = ninjaRepository;
+            Ninja = ninja;
             AddNinjaCommand = new RelayCommand(AddNinja);
             CloseCommand = new RelayCommand(Close);
-            Name = "Nein";
-            Gold = 9999;
         }
 
         public void AddNinja()
@@ -30,6 +30,7 @@ namespace PROG5.ViewModel
                 Name = Name
             };
             if (!NinjaRepository.Add(ninja)) return;
+            Ninja.UpdateCollection();
             Close();
         }
 
