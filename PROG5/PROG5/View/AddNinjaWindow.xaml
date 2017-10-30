@@ -8,15 +8,15 @@
         Title="Add new ninja" Height="206.805" Width="232.544"
         DataContext="{Binding Popup, Source={StaticResource Locator}}">
     <Grid Margin="0,0,2,0">
-        <Button Content="OK" HorizontalAlignment="Left" Margin="32,130,0,0" VerticalAlignment="Top" Width="75" 
-                Command="{Binding AddNinjaCommand}"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="119,130,0,0" VerticalAlignment="Top" Width="75" 
                 IsCancel="True" IsDefault="True" Command="{Binding CloseCommand}"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="32,130,0,0" VerticalAlignment="Top" Width="75" 
+                Command="{Binding AddNinjaCommand}" IsDefault="True"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="32,52,0,0" VerticalAlignment="Top"/>
         <Label Content="Gold" HorizontalAlignment="Left" Margin="32,83,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="74,56,-8,0" TextWrapping="Wrap" 
-                  VerticalAlignment="Top" Width="120" Text="{Binding Name, Mode=TwoWay}"/>
+                  VerticalAlignment="Top" Width="120" Text="{Binding Name, FallbackValue='John Doe', Mode=TwoWay}"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="74,85,0,0" TextWrapping="Wrap" 
-                  VerticalAlignment="Top" Width="120" Text="{Binding Gold, FallbackValue=0, Mode=TwoWay, StringFormat=\{0:D\}, UpdateSourceTrigger=PropertyChanged}" />
+                  VerticalAlignment="Top" Width="120" Text="{Binding Gold, FallbackValue=1000, Mode=TwoWay, StringFormat=\{0:D\}, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </Window>
