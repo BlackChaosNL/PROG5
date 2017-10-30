@@ -37,7 +37,11 @@ namespace PROG5.Repository.Repos
                             Agi = item.Agi,
                             Str = item.Str,
                             Int = item.Int,
-                            Name = item.Name
+                            Name = item.Name,
+                            EquipmentTypeViewModel = new EquipmentTypeViewModel {
+                                Id = item.EquipmentType.Id,
+                                Name = item.EquipmentType.Name,
+                            },
                         });
                     }
                 }

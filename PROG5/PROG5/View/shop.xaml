@@ -15,15 +15,7 @@
         <ComboBox HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" 
                   Width="142" ItemsSource="{Binding EquipmentType}" DisplayMemberPath="Name" SelectedValue="{Binding SelectedEquipmentType}"/>
         <ListBox HorizontalAlignment="Left" Height="197" Margin="90,37,0,0" VerticalAlignment="Top" DisplayMemberPath="Name"
-                 Width="142" ItemsSource="{Binding Equipment}" SelectedItem="{Binding SelectedEquipment}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                 Width="142" ItemsSource="{Binding Equipment}" SelectedItem="{Binding SelectedEquipment}"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="249" Margin="237,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="161"/>
         <Label Content="Statistics" HorizontalAlignment="Left" Margin="289,11,0,0" VerticalAlignment="Top"/>
         <Separator HorizontalAlignment="Left" Height="20" Margin="237,27,0,0" VerticalAlignment="Top" Width="161"/>
