@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using PROG5.Repository.Interfaces;
 using PROG5.View;
+using System.ComponentModel;
 
 namespace PROG5.ViewModel
 {
@@ -23,8 +24,11 @@ namespace PROG5.ViewModel
             get => SavedEquipmentTypeViewModel;
             set
             {
+                // Update the equipment list
+                Equipment = EquipmentRepository.GetAllFromType(value);
+
+                // Save the newly selected type
                 SavedEquipmentTypeViewModel = value;
-                ShowWeaponsInList(SavedEquipmentTypeViewModel);
             }
         }
         public ObservableCollection<EquipmentTypeViewModel> EquipmentType => TypeRepository.GetAll();
@@ -45,11 +49,6 @@ namespace PROG5.ViewModel
             ItemCommand = new RelayCommand(ItemManagementWindow);
             TypeCommand = new RelayCommand(TypeManagementWindow);
             BuyCommand = new RelayCommand(BuyItem);
-        }
-
-        public void ShowWeaponsInList(EquipmentTypeViewModel type)
-        {
-            Equipment = EquipmentRepository.GetAllFromType(type);
         }
 
         public void BuyItem()

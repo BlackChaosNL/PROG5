@@ -14,7 +14,7 @@
         </Button>
         <ComboBox HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" 
                   Width="142" ItemsSource="{Binding EquipmentType}" DisplayMemberPath="Name" SelectedValue="{Binding SelectedEquipmentType}"/>
-        <ListBox HorizontalAlignment="Left" Height="197" Margin="90,37,0,0" VerticalAlignment="Top" 
+        <ListBox HorizontalAlignment="Left" Height="197" Margin="90,37,0,0" VerticalAlignment="Top" DisplayMemberPath="Name"
                  Width="142" ItemsSource="{Binding Equipment}" SelectedItem="{Binding SelectedEquipment}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
