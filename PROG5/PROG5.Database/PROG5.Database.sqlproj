@@ -60,11 +60,9 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Post-Deployment" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Ninja.sql" />
-    <Build Include="NinjaEquipment.sql" />
-    <Build Include="Equipment.sql" />
-    <Build Include="EquipmentType.sql" />
+    <PostDeploy Include="Post-Deployment\AddItemsToShop.sql" />
   </ItemGroup>
 </Project>
