@@ -97,7 +97,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\AddNinjaController.cs" />
     <Compile Include="Repository\Repos\EquipmentRepository.cs" />
     <Compile Include="Repository\Repos\NinjaEquipmentRepository.cs" />
     <Compile Include="ViewModel\AddNinjaDialogViewModel.cs" />
