@@ -14,7 +14,7 @@ namespace PROG5.Repository.Repos
             var equipment = new ObservableCollection<EquipmentViewModel>();
             using (var ctx = new DatabaseModelContainer())
             {
-                foreach (var item in ctx.EquipmentSet)
+                foreach (var item in ctx.EquipmentSet.ToList())
                 {
                     equipment.Add(new EquipmentViewModel(){
                         Id = item.Id,
@@ -33,7 +33,7 @@ namespace PROG5.Repository.Repos
             var equipment = new ObservableCollection<EquipmentViewModel>();
             using (var ctx = new DatabaseModelContainer())
             {
-                foreach (var item in ctx.EquipmentSet)
+                foreach (var item in ctx.EquipmentSet.ToList())
                 {
                     if (item.EquipmentType.Id == type.Id)
                     {
