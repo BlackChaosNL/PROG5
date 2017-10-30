@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using PROG5.Repository.Interfaces;
-using PROG5.Controllers;
 using PROG5.View;
 
 namespace PROG5.ViewModel
@@ -52,8 +49,7 @@ namespace PROG5.ViewModel
         public void RemoveNinja()
         {
             var ninja = _ninjaRepository.GetAll().First(o => o.Name == SelectedNinja.Name);
-            if (_ninjaRepository.Delete(ninja))
-            {
+            if (_ninjaRepository.Delete(ninja)) {
                 NinjaCollection.Remove(NinjaCollection.First(o => o.Id == SelectedNinja.Id));
             };
             UpdateCollection();

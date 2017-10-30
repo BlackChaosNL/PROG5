@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace PROG5.ViewModel
 {
     public class NinjaViewModel

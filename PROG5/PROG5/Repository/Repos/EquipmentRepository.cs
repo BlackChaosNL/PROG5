@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using PROG5.Entities;
 using PROG5.Repository.Interfaces;
 using PROG5.ViewModel;
@@ -12,11 +11,9 @@ namespace PROG5.Repository.Repos
         public ObservableCollection<EquipmentViewModel> GetAll()
         {
             var equipment = new ObservableCollection<EquipmentViewModel>();
-            using (var ctx = new DatabaseModelContainer())
-            {
-                foreach (var item in ctx.EquipmentSet.ToList())
-                {
-                    equipment.Add(new EquipmentViewModel(){
+            using (var ctx = new DatabaseModelContainer()) {
+                foreach (var item in ctx.EquipmentSet.ToList()) {
+                    equipment.Add(new EquipmentViewModel() {
                         Id = item.Id,
                         Agi = item.Agi,
                         Str = item.Str,
@@ -31,13 +28,11 @@ namespace PROG5.Repository.Repos
         public ObservableCollection<EquipmentViewModel> GetAllFromType(EquipmentTypeViewModel type)
         {
             var equipment = new ObservableCollection<EquipmentViewModel>();
-            using (var ctx = new DatabaseModelContainer())
-            {
-                foreach (var item in ctx.EquipmentSet.ToList())
-                {
-                    if (item.EquipmentType.Id == type.Id)
-                    {
-                        equipment.Add(new EquipmentViewModel(){
+
+            using (var ctx = new DatabaseModelContainer()) {
+                foreach (var item in ctx.EquipmentSet.ToList()) {
+                    if (item.EquipmentType.Id == type.Id) {
+                        equipment.Add(new EquipmentViewModel() {
                             Id = item.Id,
                             Agi = item.Agi,
                             Str = item.Str,
@@ -47,14 +42,14 @@ namespace PROG5.Repository.Repos
                     }
                 }
             }
+
             return equipment;
         }
 
         public bool Add(EquipmentViewModel item)
         {
-            using (var ctx = new DatabaseModelContainer())
-            {
-                ctx.EquipmentSet.Add(new Equipment(){
+            using (var ctx = new DatabaseModelContainer()) {
+                ctx.EquipmentSet.Add(new Equipment() {
                     Agi = item.Agi,
                     Str = item.Str,
                     Int = item.Int,
@@ -67,8 +62,7 @@ namespace PROG5.Repository.Repos
 
         public bool Delete(EquipmentViewModel item)
         {
-            using (var ctx = new DatabaseModelContainer())
-            {
+            using (var ctx = new DatabaseModelContainer()) {
                 ctx.EquipmentSet.Remove(ctx.EquipmentSet.First(o => o.Id == item.Id) ?? new Equipment());
                 ctx.SaveChanges();
             }
@@ -77,8 +71,7 @@ namespace PROG5.Repository.Repos
 
         public bool Update(EquipmentViewModel item)
         {
-            using (var ctx = new DatabaseModelContainer())
-            {
+            using (var ctx = new DatabaseModelContainer()) {
                 var equipment = ctx.EquipmentSet.First(o => o.Id == item.Id);
                 equipment.Agi = item.Agi;
                 equipment.Int = item.Int;

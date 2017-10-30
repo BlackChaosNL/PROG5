@@ -36,7 +36,7 @@ namespace PROG5.ViewModel
         public void Add()
         {
             if (string.IsNullOrEmpty(NewType)) return;
-            var etvm = new EquipmentTypeViewModel() {Name = NewType};
+            var etvm = new EquipmentTypeViewModel() { Name = NewType };
             TypeRepository.Add(etvm);
             TypesCollection.Add(TypeRepository.GetAll().First(o => o.Name == etvm.Name));
         }

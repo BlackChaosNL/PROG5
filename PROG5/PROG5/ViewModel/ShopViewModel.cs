@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using PROG5.Repository.Interfaces;
 using PROG5.View;
-using System.ComponentModel;
 
 namespace PROG5.ViewModel
 {
@@ -36,8 +33,8 @@ namespace PROG5.ViewModel
         public IEquipmentTypeRepository TypeRepository { get; set; }
         public IEquipmentRepository EquipmentRepository { get; set; }
         public INinjaEquipmentRepository NinjaEquipmentRepository { get; set; }
-        public ShopViewModel(ShowNinjaViewModel sh, 
-            IEquipmentTypeRepository types, 
+        public ShopViewModel(ShowNinjaViewModel sh,
+            IEquipmentTypeRepository types,
             IEquipmentRepository equipment,
             INinjaEquipmentRepository link)
         {
@@ -53,7 +50,7 @@ namespace PROG5.ViewModel
 
         public void BuyItem()
         {
-            
+
         }
 
         #region Controls

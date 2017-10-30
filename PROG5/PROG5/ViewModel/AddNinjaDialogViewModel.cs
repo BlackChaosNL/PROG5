@@ -15,8 +15,8 @@ namespace PROG5.ViewModel
         public INinjaRepository NinjaRepository { get; set; }
         public ShowNinjaViewModel Ninja { get; set; }
 
-        public AddNinjaDialogViewModel(INinjaRepository ninjaRepository, 
-            ShowNinjaViewModel ninja) 
+        public AddNinjaDialogViewModel(INinjaRepository ninjaRepository,
+            ShowNinjaViewModel ninja)
         {
             NinjaRepository = ninjaRepository;
             Ninja = ninja;
@@ -26,7 +26,7 @@ namespace PROG5.ViewModel
 
         public void AddNinja()
         {
-            var ninja = new NinjaViewModel(){
+            var ninja = new NinjaViewModel() {
                 Gold = Gold,
                 Name = Name
             };
