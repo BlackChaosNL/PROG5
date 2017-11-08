@@ -24,7 +24,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="249" Margin="237,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="161"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="224" Margin="237,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="161"/>
         <Label Content="Statistics" HorizontalAlignment="Left" Margin="289,11,0,0" VerticalAlignment="Top"/>
         <Separator HorizontalAlignment="Left" Height="20" Margin="237,27,0,0" VerticalAlignment="Top" Width="161"/>
         <Label Content="Intelligence" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top"/>
@@ -45,6 +45,8 @@
         <Separator HorizontalAlignment="Left" Height="20" Margin="259,195,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Item Types" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TypeCommand}"/>
         <Button Content="Buy" HorizontalAlignment="Left" Margin="90,239,0,0" VerticalAlignment="Top" Width="69" Command="{Binding BuyCommand}"/>
-        <Button Content="Sell" HorizontalAlignment="Left" Margin="162,239,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button Content="Sell" HorizontalAlignment="Left" Margin="162,239,0,0" VerticalAlignment="Top" Width="70" Command="{Binding SellCommand}"/>
+        <TextBox Height="23" Margin="259,239,0,0" TextWrapping="Wrap" Text="{Binding Ninja.Gold, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+            HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
     </Grid>
 </Window>
