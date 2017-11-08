@@ -20,7 +20,12 @@ namespace PROG5.ViewModel
 
         public ICommand SellCommand { get; set; }
 
-        public NinjaViewModel Ninja { get; set; }
+        public NinjaViewModel Ninja {
+            get
+            {
+                return showNinjaViewModel.SelectedNinja;
+            }
+        }
 
         public EquipmentViewModel SelectedEquipment {
             get => _selectedEquipment;
@@ -63,14 +68,16 @@ namespace PROG5.ViewModel
 
         private EquipmentViewModel _selectedEquipment;
 
+        private ShowNinjaViewModel showNinjaViewModel;
+
         public ShopViewModel(
             ShowNinjaViewModel sh,
             IEquipmentTypeRepository types,
             IEquipmentRepository equipment,
             INinjaEquipmentRepository link
         ) {
+            showNinjaViewModel = sh;
             hasEquipment = false;
-            Ninja = sh.SelectedNinja; // TODO: Currently only set on the FIRST time the shop opens, never updated, it should update every time the shop opens
             TypeRepository = types;
             NinjaEquipmentRepository = link;
             EquipmentRepository = equipment;

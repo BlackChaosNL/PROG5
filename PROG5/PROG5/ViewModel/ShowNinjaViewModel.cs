@@ -11,18 +11,26 @@ namespace PROG5.ViewModel
     public class ShowNinjaViewModel : ViewModelBase
     {
         public ICommand Close { get; set; }
+
         public ICommand CreateNinja { get; set; }
+
         public ICommand DeleteNinja { get; set; }
+
         public ICommand ShopForNinja { get; set; }
+
         public NinjaViewModel SelectedNinja { get; set; }
 
         public int SelectedNinjaAgility { get; set; }
-        public int SelectedNinjaIntelligence { get; set; }
-        public int SelectedNinjaStrength { get; set; }
-        public int SelectedNinjaRemainingGold { get; set; }
-        public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
-        private readonly INinjaRepository _ninjaRepository;
 
+        public int SelectedNinjaIntelligence { get; set; }
+
+        public int SelectedNinjaStrength { get; set; }
+
+        public int SelectedNinjaRemainingGold { get; set; }
+
+        public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
+
+        private readonly INinjaRepository _ninjaRepository;
 
         public ShowNinjaViewModel(INinjaRepository ninjas)
         {
