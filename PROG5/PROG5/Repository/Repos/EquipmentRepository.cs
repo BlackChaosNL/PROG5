@@ -30,7 +30,13 @@ namespace PROG5.Repository.Repos
             var equipment = new ObservableCollection<EquipmentViewModel>();
 
             using (var ctx = new DatabaseModelContainer()) {
-                foreach (var item in ctx.EquipmentSet.ToList().Where(o => o.EquipmentType.Id == type.Id)) {
+                var results = ctx.EquipmentSet.ToList();
+
+                foreach (var item in results) {
+                    if (item.EquipmentType.Id != type.Id) {
+                        continue;
+                    }
+
                     equipment.Add(new EquipmentViewModel() {
                         Id = item.Id,
                         Agi = item.Agi,
