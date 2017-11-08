@@ -30,8 +30,8 @@ namespace PROG5.ViewModel
             UpdateCollection();
             Close = new RelayCommand(App.CloseWindow);
             CreateNinja = new RelayCommand(AddNinja);
-            DeleteNinja = new RelayCommand(RemoveNinja);
-            ShopForNinja = new RelayCommand(ShopNinja);
+            DeleteNinja = new RelayCommand(RemoveNinja, () => SelectedNinja != null);
+            ShopForNinja = new RelayCommand(ShopNinja, () => SelectedNinja != null);
             SelectedNinjaAgility = 0;
             SelectedNinjaIntelligence = 0;
             SelectedNinjaStrength = 0;
