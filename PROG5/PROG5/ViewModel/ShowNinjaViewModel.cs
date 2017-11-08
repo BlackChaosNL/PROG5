@@ -20,14 +20,6 @@ namespace PROG5.ViewModel
 
         public NinjaViewModel SelectedNinja { get; set; }
 
-        public int SelectedNinjaAgility { get; set; }
-
-        public int SelectedNinjaIntelligence { get; set; }
-
-        public int SelectedNinjaStrength { get; set; }
-
-        public int SelectedNinjaRemainingGold { get; set; }
-
         public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
 
         private readonly INinjaRepository _ninjaRepository;
@@ -40,10 +32,6 @@ namespace PROG5.ViewModel
             CreateNinja = new RelayCommand(AddNinja);
             DeleteNinja = new RelayCommand(RemoveNinja, () => SelectedNinja != null);
             ShopForNinja = new RelayCommand(ShopNinja, () => SelectedNinja != null);
-            SelectedNinjaAgility = 0;
-            SelectedNinjaIntelligence = 0;
-            SelectedNinjaStrength = 0;
-            SelectedNinjaRemainingGold = 0;
         }
 
         public void AddNinja()
@@ -57,9 +45,11 @@ namespace PROG5.ViewModel
         public void RemoveNinja()
         {
             var ninja = _ninjaRepository.GetAll().First(o => o.Name == SelectedNinja.Name);
+
             if (_ninjaRepository.Delete(ninja)) {
                 NinjaCollection.Remove(NinjaCollection.First(o => o.Id == SelectedNinja.Id));
-            };
+            }
+
             UpdateCollection();
         }
 
