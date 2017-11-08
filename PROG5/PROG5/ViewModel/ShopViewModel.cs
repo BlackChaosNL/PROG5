@@ -24,6 +24,7 @@ namespace PROG5.ViewModel
             {
                 // Update the equipment list
                 Equipment = EquipmentRepository.GetAllFromType(value);
+
                 // Save the newly selected type
                 SavedEquipmentTypeViewModel = value;
             }
