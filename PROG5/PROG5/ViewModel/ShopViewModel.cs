@@ -20,12 +20,7 @@ namespace PROG5.ViewModel
 
         public ICommand SellCommand { get; set; }
 
-        public NinjaViewModel Ninja {
-            get
-            {
-                return showNinjaViewModel.SelectedNinja;
-            }
-        }
+        public NinjaViewModel Ninja => _showNinjaViewModel.SelectedNinja;
 
         public EquipmentViewModel SelectedEquipment {
             get => _selectedEquipment;
@@ -35,7 +30,7 @@ namespace PROG5.ViewModel
                 _selectedEquipment = value;
 
                 // TODO: Check if the currently selected ninja already has the currently selected equipment
-                hasEquipment = false;
+                _hasEquipment = false;
             }
         }
 
@@ -47,16 +42,24 @@ namespace PROG5.ViewModel
             set
             {
                 // Update the equipment list
-                Equipment = EquipmentRepository.GetAllFromType(value);
-
                 // Save the newly selected type
                 SavedEquipmentTypeViewModel = value;
+                GetEquipment = EquipmentRepository.GetAllFromType(value);
+                RaisePropertyChanged();
             }
         }
 
         public ObservableCollection<EquipmentTypeViewModel> EquipmentType => TypeRepository.GetAll();
 
-        public ObservableCollection<EquipmentViewModel> Equipment { get; set; }
+        public ObservableCollection<EquipmentViewModel> GetEquipment
+        {
+            get => _equipment;
+            set
+            {
+                _equipment = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public IEquipmentTypeRepository TypeRepository { get; set; }
 
@@ -64,11 +67,13 @@ namespace PROG5.ViewModel
 
         public INinjaEquipmentRepository NinjaEquipmentRepository { get; set; }
 
-        private bool hasEquipment;
+        private bool _hasEquipment;
 
         private EquipmentViewModel _selectedEquipment;
 
-        private ShowNinjaViewModel showNinjaViewModel;
+        private ObservableCollection<EquipmentViewModel> _equipment;
+
+        private readonly ShowNinjaViewModel _showNinjaViewModel;
 
         public ShopViewModel(
             ShowNinjaViewModel sh,
@@ -76,16 +81,16 @@ namespace PROG5.ViewModel
             IEquipmentRepository equipment,
             INinjaEquipmentRepository link
         ) {
-            showNinjaViewModel = sh;
-            hasEquipment = false;
+            _showNinjaViewModel = sh;
+            _hasEquipment = false;
             TypeRepository = types;
             NinjaEquipmentRepository = link;
             EquipmentRepository = equipment;
             CloseCommand = new RelayCommand(Close);
             ItemCommand = new RelayCommand(ItemManagementWindow);
             TypeCommand = new RelayCommand(TypeManagementWindow);
-            BuyCommand = new RelayCommand(BuyItem, () => SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.Gold && !hasEquipment);
-            SellCommand = new RelayCommand(SellItem, () => SelectedEquipment != null && hasEquipment);
+            BuyCommand = new RelayCommand(BuyItem, () => SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.Gold && !_hasEquipment);
+            SellCommand = new RelayCommand(SellItem, () => SelectedEquipment != null && _hasEquipment);
         }
 
         public void BuyItem()
