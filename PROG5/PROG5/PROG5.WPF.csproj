@@ -112,10 +112,10 @@
     <Compile Include="Repository\Interfaces\INinjaRepository.cs" />
     <Compile Include="Repository\Repos\EquipmentTypeRepository.cs" />
     <Compile Include="Repository\Repos\NinjaRepository.cs" />
-    <Compile Include="ViewModel\EquipmentTypeViewModel.cs" />
-    <Compile Include="ViewModel\EquipmentViewModel.cs" />
-    <Compile Include="ViewModel\NinjaEquipmentViewModel.cs" />
-    <Compile Include="ViewModel\NinjaViewModel.cs" />
+    <Compile Include="Model\EquipmentTypeViewModel.cs" />
+    <Compile Include="Model\EquipmentViewModel.cs" />
+    <Compile Include="Model\NinjaEquipmentViewModel.cs" />
+    <Compile Include="Model\NinjaViewModel.cs" />
     <Compile Include="ViewModel\ShopViewModel.cs" />
     <Compile Include="ViewModel\ShowNinjaViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
