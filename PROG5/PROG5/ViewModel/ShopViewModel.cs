@@ -10,6 +10,7 @@ namespace PROG5.ViewModel
 {
     public class ShopViewModel : ViewModelBase
     {
+        #region Data
         public ICommand CloseCommand { get; set; }
 
         public ICommand ItemCommand { get; set; }
@@ -20,17 +21,33 @@ namespace PROG5.ViewModel
 
         public ICommand SellCommand { get; set; }
 
+        public IEquipmentTypeRepository TypeRepository { get; set; }
+
+        public IEquipmentRepository EquipmentRepository { get; set; }
+
+        public INinjaEquipmentRepository NinjaEquipmentRepository { get; set; }
+
+        private bool _hasEquipment;
+
+        private EquipmentViewModel _selectedEquipment;
+
+        private ObservableCollection<EquipmentViewModel> _equipment;
+
+        private readonly ShowNinjaViewModel _showNinjaViewModel;
+
         public NinjaViewModel Ninja => _showNinjaViewModel.SelectedNinja;
 
-        public EquipmentViewModel SelectedEquipment {
+        public EquipmentViewModel SelectedEquipment
+        {
             get => _selectedEquipment;
-
             set
             {
                 _selectedEquipment = value;
-
-                // TODO: Check if the currently selected ninja already has the currently selected equipment
+                var repo = NinjaEquipmentRepository.GetAll();
+                if (repo.First(o => o.NinjaViewModel.Id == Ninja.Id && o.EquipmentViewModel.Id == _selectedEquipment.Id) != null)
+                    _hasEquipment = true;
                 _hasEquipment = false;
+                RaisePropertyChanged();
             }
         }
 
@@ -41,8 +58,6 @@ namespace PROG5.ViewModel
             get => SavedEquipmentTypeViewModel;
             set
             {
-                // Update the equipment list
-                // Save the newly selected type
                 SavedEquipmentTypeViewModel = value;
                 GetEquipment = EquipmentRepository.GetAllFromType(value);
                 RaisePropertyChanged();
@@ -60,20 +75,7 @@ namespace PROG5.ViewModel
                 RaisePropertyChanged();
             }
         }
-
-        public IEquipmentTypeRepository TypeRepository { get; set; }
-
-        public IEquipmentRepository EquipmentRepository { get; set; }
-
-        public INinjaEquipmentRepository NinjaEquipmentRepository { get; set; }
-
-        private bool _hasEquipment;
-
-        private EquipmentViewModel _selectedEquipment;
-
-        private ObservableCollection<EquipmentViewModel> _equipment;
-
-        private readonly ShowNinjaViewModel _showNinjaViewModel;
+        #endregion
 
         public ShopViewModel(
             ShowNinjaViewModel sh,
@@ -83,7 +85,7 @@ namespace PROG5.ViewModel
         ) {
             _showNinjaViewModel = sh;
             _hasEquipment = false;
-            TypeRepository = types;
+            TypeRepository = types; 
             NinjaEquipmentRepository = link;
             EquipmentRepository = equipment;
             CloseCommand = new RelayCommand(Close);

@@ -29,11 +29,11 @@
         <Label Content="Intelligence" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top"/>
         <Label Content="Strength" HorizontalAlignment="Left" Margin="291,88,0,0" VerticalAlignment="Top"/>
         <Label Content="Agility" HorizontalAlignment="Left" Margin="297,135,0,0" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="259,68,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Int, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+        <TextBox Height="23" Margin="259,68,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Int}" VerticalAlignment="Top" Width="120" 
             HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
-        <TextBox Height="23" Margin="259,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Str, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+        <TextBox Height="23" Margin="259,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Str}" VerticalAlignment="Top" Width="120" 
             HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
-        <TextBox Height="23" Margin="259,161,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Agi, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+        <TextBox Height="23" Margin="259,161,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Agi}" VerticalAlignment="Top" Width="120" 
             HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
         <Separator HorizontalAlignment="Left" Height="20" Margin="259,99,0,0" VerticalAlignment="Top" Width="120"/>
         <Separator HorizontalAlignment="Left" Height="20" Margin="259,53,0,0" VerticalAlignment="Top" Width="120"/>
@@ -45,7 +45,8 @@
         <Button Content="Item Types" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TypeCommand}"/>
         <Button Content="Buy" HorizontalAlignment="Left" Margin="90,239,0,0" VerticalAlignment="Top" Width="69" Command="{Binding BuyCommand}"/>
         <Button Content="Sell" HorizontalAlignment="Left" Margin="162,239,0,0" VerticalAlignment="Top" Width="70" Command="{Binding SellCommand}"/>
-        <TextBox Height="23" Margin="259,239,0,0" TextWrapping="Wrap" Text="{Binding Ninja.Gold, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+        <TextBox Height="23" Margin="10,112,0,0" TextWrapping="Wrap" Text="{Binding Ninja.Gold, Mode=OneWay}" VerticalAlignment="Top" Width="74" 
             HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
+        <Label Content="{Binding Ninja.Name}" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="74" Height="26"/>
     </Grid>
 </Window>
