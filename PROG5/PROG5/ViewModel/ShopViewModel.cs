@@ -27,13 +27,15 @@ namespace PROG5.ViewModel
 
         public INinjaEquipmentRepository NinjaEquipmentRepository { get; set; }
 
+        public INinjaRepository NinjaRepository { get; set; }
+
         private bool _hasEquipment;
 
         private EquipmentViewModel _selectedEquipment;
 
         private ObservableCollection<EquipmentViewModel> _equipment;
 
-        private readonly ShowNinjaViewModel _showNinjaViewModel;
+        private ShowNinjaViewModel _showNinjaViewModel;
 
         public NinjaViewModel Ninja => _showNinjaViewModel.SelectedNinja;
 
@@ -44,7 +46,8 @@ namespace PROG5.ViewModel
             {
                 _selectedEquipment = value;
                 var repo = NinjaEquipmentRepository.GetAll();
-                if (repo.First(o => o.NinjaViewModel.Id == Ninja.Id && o.EquipmentViewModel.Id == _selectedEquipment.Id) != null)
+                if (repo.FirstOrDefault(o =>
+                        o.NinjaViewModel.Id == Ninja.Id && o.EquipmentViewModel.Id == _selectedEquipment.Id) != null)
                     _hasEquipment = true;
                 _hasEquipment = false;
                 RaisePropertyChanged();
@@ -81,13 +84,15 @@ namespace PROG5.ViewModel
             ShowNinjaViewModel sh,
             IEquipmentTypeRepository types,
             IEquipmentRepository equipment,
-            INinjaEquipmentRepository link
+            INinjaEquipmentRepository link,
+            INinjaRepository ninja
         ) {
             _showNinjaViewModel = sh;
             _hasEquipment = false;
             TypeRepository = types; 
             NinjaEquipmentRepository = link;
             EquipmentRepository = equipment;
+            NinjaRepository = ninja;
             CloseCommand = new RelayCommand(Close);
             ItemCommand = new RelayCommand(ItemManagementWindow);
             TypeCommand = new RelayCommand(TypeManagementWindow);
@@ -97,15 +102,25 @@ namespace PROG5.ViewModel
 
         public void BuyItem()
         {
-
+            NinjaEquipmentRepository.Add(new NinjaEquipmentViewModel()
+            {
+                EquipmentViewModel = SelectedEquipment,
+                NinjaViewModel = Ninja
+            });
+            Ninja.Gold -= SelectedEquipment.Gold;
+            NinjaRepository.Update(Ninja);
+            RaisePropertyChanged();
         }
 
         public void SellItem()
         {
 
+            Ninja.Gold += SelectedEquipment.Gold;
+            NinjaRepository.Update(Ninja);
+            RaisePropertyChanged();
         }
 
-        #region Controls
+        #region Main buttons
         public void TypeManagementWindow()
         {
             var window = new TypeManagementWindow();

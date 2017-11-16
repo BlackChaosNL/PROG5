@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
+using System.Linq;
 using PROG5.Entities;
 using PROG5.Repository.Interfaces;
 using PROG5.ViewModel;
@@ -13,7 +14,7 @@ namespace PROG5.Repository.Repos
             var ninjaEquipment = new ObservableCollection<NinjaEquipmentViewModel>();
             using (var ctx = new DatabaseModelContainer())
             {
-                foreach (var equipment in ctx.NinjaEquipmentSet)
+                foreach (var equipment in ctx.NinjaEquipmentSet.ToList())
                 {
                     ninjaEquipment.Add(new NinjaEquipmentViewModel() { Id = equipment.Id,
                         EquipmentViewModel = new EquipmentViewModel() { Id = equipment.Equipment.Id },
@@ -28,8 +29,9 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
-                ctx.NinjaEquipmentSet.Add(new NinjaEquipment(){Ninja = new Ninja() {Id = item.NinjaViewModel.Id},
-                    Equipment = new Equipment(){ Id = item.EquipmentViewModel.Id } });
+                var n = ctx.NinjaSet.First(o => o.Id == item.NinjaViewModel.Id);
+                var e = ctx.EquipmentSet.First(o => o.Id == item.EquipmentViewModel.Id);
+                ctx.NinjaEquipmentSet.Add(new NinjaEquipment(){ Ninja = n, Equipment = e });
                 ctx.SaveChanges();
                 return true;
             }
