@@ -100,6 +100,7 @@
     <Compile Include="Repository\Repos\EquipmentRepository.cs" />
     <Compile Include="Repository\Repos\NinjaEquipmentRepository.cs" />
     <Compile Include="ViewModel\AddNinjaDialogViewModel.cs" />
+    <Compile Include="ViewModel\ItemManagementViewModel.cs" />
     <Compile Include="ViewModel\TypeManagementViewModel.cs" />
     <Compile Include="View\AddNinjaWindow.xaml.cs">
       <DependentUpon>AddNinjaWindow.xaml</DependentUpon>

@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Item Management Window" Height="303.137" Width="418.619">
+        Title="Item Management Window" Height="303.137" Width="448.619"
+        DataContext="{Binding Item, Source={StaticResource Locator}}">
     <Grid>
         <!-- Add item -->
         <GroupBox Header="Add item" HorizontalAlignment="Left" Height="231" Margin="10,10,0,0" VerticalAlignment="Top" Width="232" />
-        <ComboBox HorizontalAlignment="Left" Margin="100,28,0,0" VerticalAlignment="Top" Width="128" Height="20"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,53,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="128"/>
+        <ComboBox HorizontalAlignment="Left" Margin="100,28,0,0" VerticalAlignment="Top" 
+                  Width="128" Height="20" ItemsSource="{Binding EquipmentTypeCollection}" DisplayMemberPath="Name"/>
         <Label Content=":" HorizontalAlignment="Left" Margin="85,24,0,0" VerticalAlignment="Top" Height="24" Width="13"/>
         <Label Content=":" HorizontalAlignment="Left" Margin="85,51,0,0" VerticalAlignment="Top" Height="24" Width="13"/>
         <Label Content=":" HorizontalAlignment="Left" Margin="85,77,0,0" VerticalAlignment="Top" Height="24" Width="13"/>
@@ -22,17 +23,36 @@
         <Label Content="Cost (G)" HorizontalAlignment="Left" Margin="19,76,0,0" VerticalAlignment="Top"/>
         <Label Content="Intelligence" HorizontalAlignment="Left" Margin="18,101,0,0" VerticalAlignment="Top" Width="73"/>
         <Label Content="Agility" HorizontalAlignment="Left" Margin="19,146,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,78,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="128"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="128"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,126,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="128"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,150,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="128"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="154,213,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,53,0,0" 
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,78,0,0" 
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,102,0,0" 
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,126,0,0" 
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="101,150,0,0" 
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="154,213,0,0" 
+                VerticalAlignment="Top" Width="75" Command="{Binding AddCommand}"/>
         <!-- Remove item -->
-        <GroupBox Header="Remove item" HorizontalAlignment="Left" Height="231" Margin="247,10,0,0" VerticalAlignment="Top" Width="155"/>
-        <ComboBox HorizontalAlignment="Left" Margin="257,28,0,0" VerticalAlignment="Top" Width="134"/>
-        <ListBox HorizontalAlignment="Left" Height="153" Margin="257,55,0,0" VerticalAlignment="Top" Width="134"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="316,213,0,0" VerticalAlignment="Top" Width="75"/>
+        <GroupBox Header="Remove item" HorizontalAlignment="Left" Height="231" Margin="247,10,0,0" VerticalAlignment="Top" Width="184"/>
+        <ComboBox HorizontalAlignment="Left" Margin="257,28,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding EquipmentTypeCollection}"
+                   DisplayMemberPath="Name" SelectedValue="{Binding GetEquipmentTypeViewModel}"/>
+        <ListBox HorizontalAlignment="Left" Height="153" Margin="257,55,0,0" VerticalAlignment="Top" Width="163" 
+                 ItemsSource="{Binding GetEquipment}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}"  >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="345,213,0,0" 
+                VerticalAlignment="Top" Width="75" Command="{Binding RemoveCommand}"/>
         <!-- Close -->
-        <Button Content="Close" HorizontalAlignment="Left" Margin="316,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="345,246,0,0" 
+                VerticalAlignment="Top" Width="75" Command="{Binding ExitCommand}"/>
     </Grid>
 </Window>
