@@ -59,7 +59,9 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="NinjaNinjaEquipment">
-    <End Role="Ninja" Type="DatabaseModel.Store.NinjaSet" Multiplicity="0..1" />
+    <End Role="Ninja" Type="DatabaseModel.Store.NinjaSet" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="NinjaEquipment" Type="DatabaseModel.Store.NinjaEquipmentSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ninja">
