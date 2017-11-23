@@ -27,6 +27,27 @@ namespace PROG5.ViewModel
             set
             {
                 _selectedNinja = value;
+
+                #region Set default stats
+                _selectedNinja.Agility = 0;
+                _selectedNinja.Intelligence = 0;
+                _selectedNinja.Strength = 0;
+                _selectedNinja.RemainingGold = _selectedNinja.Gold;
+                #endregion
+
+                #region Set the ninja's stats
+                var equipment = ninjaEquipmentRepository.GetAll().Where(
+                    x => x.Ninja.Id == _selectedNinja.Id
+                );
+
+                foreach (var item in equipment) {
+                    _selectedNinja.Agility += item.Equipment.Agi;
+                    _selectedNinja.Intelligence += item.Equipment.Int;
+                    _selectedNinja.Strength += item.Equipment.Str;
+                    _selectedNinja.RemainingGold -= item.Equipment.Gold;
+                }
+                #endregion
+
                 RaisePropertyChanged();
             }
         }
@@ -35,11 +56,17 @@ namespace PROG5.ViewModel
 
         private readonly INinjaRepository _ninjaRepository;
 
+        private readonly INinjaEquipmentRepository ninjaEquipmentRepository;
+
         private NinjaViewModel _selectedNinja;
 
-        public ShowNinjaViewModel(INinjaRepository ninjas)
-        {
+        public ShowNinjaViewModel(
+            INinjaRepository ninjas,
+            INinjaEquipmentRepository ninjaEquipmentRepository
+        ) {
             _ninjaRepository = ninjas;
+            this.ninjaEquipmentRepository = ninjaEquipmentRepository;
+
             UpdateCollection();
             Close = new RelayCommand(App.CloseWindow);
             CreateNinja = new RelayCommand(AddNinja);
