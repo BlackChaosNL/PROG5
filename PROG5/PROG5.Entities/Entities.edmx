@@ -147,7 +147,9 @@
           <NavigationProperty Name="Equipment" Relationship="DatabaseModel.EquipmentNinjaEquipment" FromRole="NinjaEquipment" ToRole="Equipment" />
         </EntityType>
         <Association Name="NinjaNinjaEquipment">
-          <End Type="DatabaseModel.Ninja" Role="Ninja" Multiplicity="0..1" />
+          <End Type="DatabaseModel.Ninja" Role="Ninja" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DatabaseModel.NinjaEquipment" Role="NinjaEquipment" Multiplicity="*" />
         </Association>
         <Association Name="EquipmentNinjaEquipment">
