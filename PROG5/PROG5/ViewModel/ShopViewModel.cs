@@ -45,11 +45,14 @@ namespace PROG5.ViewModel
             set
             {
                 _selectedEquipment = value;
+
                 var repo = NinjaEquipmentRepository.GetAll();
-                if (repo.FirstOrDefault(o =>
-                        o.Ninja.Id == Ninja.Id && o.Equipment.Id == _selectedEquipment.Id) != null)
-                    _hasEquipment = true;
-                _hasEquipment = false;
+                var result = repo.FirstOrDefault(
+                    o => o.Ninja.Id == Ninja.Id && o.Equipment.Id == _selectedEquipment.Id
+                );
+                
+                _hasEquipment = (result != null);
+
                 RaisePropertyChanged();
             }
         }
