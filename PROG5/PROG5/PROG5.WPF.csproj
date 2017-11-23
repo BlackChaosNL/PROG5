@@ -113,10 +113,10 @@
     <Compile Include="Repository\Interfaces\INinjaRepository.cs" />
     <Compile Include="Repository\Repos\EquipmentTypeRepository.cs" />
     <Compile Include="Repository\Repos\NinjaRepository.cs" />
-    <Compile Include="Model\EquipmentTypeViewModel.cs" />
-    <Compile Include="Model\EquipmentViewModel.cs" />
-    <Compile Include="Model\NinjaEquipmentViewModel.cs" />
-    <Compile Include="Model\NinjaViewModel.cs" />
+    <Compile Include="ViewModel\EquipmentTypeViewModel.cs" />
+    <Compile Include="ViewModel\EquipmentViewModel.cs" />
+    <Compile Include="ViewModel\NinjaEquipmentViewModel.cs" />
+    <Compile Include="ViewModel\NinjaViewModel.cs" />
     <Compile Include="ViewModel\ShopViewModel.cs" />
     <Compile Include="ViewModel\ShowNinjaViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -185,7 +185,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

@@ -18,11 +18,24 @@ namespace PROG5.ViewModel
 
         public ICommand ShopForNinja { get; set; }
 
-        public NinjaViewModel SelectedNinja { get; set; }
+        public NinjaViewModel SelectedNinja {
+            get
+            {
+                return _selectedNinja;
+            }
+
+            set
+            {
+                _selectedNinja = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public ObservableCollection<NinjaViewModel> NinjaCollection { get; set; }
 
         private readonly INinjaRepository _ninjaRepository;
+
+        private NinjaViewModel _selectedNinja;
 
         public ShowNinjaViewModel(INinjaRepository ninjas)
         {
