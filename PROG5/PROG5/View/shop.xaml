@@ -39,7 +39,7 @@
         <Separator HorizontalAlignment="Left" Height="20" Margin="259,53,0,0" VerticalAlignment="Top" Width="120"/>
         <Separator HorizontalAlignment="Left" Height="20" Margin="259,148,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Cost (G)" HorizontalAlignment="Left" Margin="292,183,0,0" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="259,208,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Gold, Mode=OneWay}" VerticalAlignment="Top" Width="120" 
+        <TextBox Height="23" Margin="259,208,0,0" TextWrapping="Wrap" Text="{Binding SelectedEquipment.Gold}" VerticalAlignment="Top" Width="120" 
             HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
         <Separator HorizontalAlignment="Left" Height="20" Margin="259,195,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Item Types" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TypeCommand}"/>
