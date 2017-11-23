@@ -31,6 +31,8 @@ namespace PROG5.ViewModel
 
         private bool _hasEquipment;
 
+        private bool _hasEquipmentType;
+
         private EquipmentViewModel _selectedEquipment;
 
         private ObservableCollection<EquipmentViewModel> _equipment;
@@ -47,11 +49,16 @@ namespace PROG5.ViewModel
                 _selectedEquipment = value;
 
                 var repo = NinjaEquipmentRepository.GetAll();
-                var result = repo.FirstOrDefault(
+                var equipmentResult = repo.FirstOrDefault(
                     o => o.Ninja.Id == Ninja.Id && o.Equipment.Id == _selectedEquipment.Id
                 );
+                var equipmentTypeResult = repo.FirstOrDefault(
+                    o => o.Ninja.Id == Ninja.Id &&
+                    o.Equipment.EquipmentTypeViewModel.Id == _selectedEquipment.EquipmentTypeViewModel.Id
+                );
                 
-                _hasEquipment = (result != null);
+                _hasEquipment = (equipmentResult != null);
+                _hasEquipmentType = (equipmentTypeResult != null);
 
                 RaisePropertyChanged();
             }
@@ -92,6 +99,7 @@ namespace PROG5.ViewModel
         ) {
             _showNinjaViewModel = sh;
             _hasEquipment = false;
+            _hasEquipmentType = false;
             TypeRepository = types; 
             NinjaEquipmentRepository = link;
             EquipmentRepository = equipment;
@@ -99,7 +107,7 @@ namespace PROG5.ViewModel
             CloseCommand = new RelayCommand(Close);
             ItemCommand = new RelayCommand(ItemManagementWindow);
             TypeCommand = new RelayCommand(TypeManagementWindow);
-            BuyCommand = new RelayCommand(BuyItem, () => SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.Gold && !_hasEquipment);
+            BuyCommand = new RelayCommand(BuyItem, () => SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.Gold && !_hasEquipmentType);
             SellCommand = new RelayCommand(SellItem, () => SelectedEquipment != null && _hasEquipment);
         }
 
@@ -110,6 +118,7 @@ namespace PROG5.ViewModel
                 Equipment = SelectedEquipment,
                 Ninja = Ninja
             });
+
             Ninja.Gold -= SelectedEquipment.Gold;
             NinjaRepository.Update(Ninja);
             RaisePropertyChanged();
@@ -117,7 +126,6 @@ namespace PROG5.ViewModel
 
         public void SellItem()
         {
-
             Ninja.Gold += SelectedEquipment.Gold;
             NinjaRepository.Update(Ninja);
             RaisePropertyChanged();
