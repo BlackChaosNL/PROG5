@@ -3,7 +3,7 @@
     public class NinjaEquipmentViewModel
     {
         public int Id { get; set; }
-        public NinjaViewModel NinjaViewModel { get; set; }
-        public EquipmentViewModel EquipmentViewModel { get; set; }
+        public NinjaViewModel Ninja { get; set; }
+        public EquipmentViewModel Equipment { get; set; }
     }
 }

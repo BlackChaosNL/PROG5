@@ -16,9 +16,9 @@ namespace PROG5.Repository.Repos
             {
                 foreach (var equipment in ctx.NinjaEquipmentSet.ToList())
                 {
-                    ninjaEquipment.Add(new NinjaEquipmentViewModel() { Id = equipment.Id,
-                        EquipmentViewModel = new EquipmentViewModel() { Id = equipment.Equipment.Id },
-                        NinjaViewModel = new NinjaViewModel() { Id = equipment.Ninja.Id }}
+                    ninjaEquipment.Add(new NinjaEquipmentViewModel { Id = equipment.Id,
+                        Equipment = new EquipmentViewModel { Id = equipment.Equipment.Id },
+                        Ninja = new NinjaViewModel { Id = equipment.Ninja.Id }}
                     );
                 }
             }
@@ -29,8 +29,8 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
-                var n = ctx.NinjaSet.First(o => o.Id == item.NinjaViewModel.Id);
-                var e = ctx.EquipmentSet.First(o => o.Id == item.EquipmentViewModel.Id);
+                var n = ctx.NinjaSet.First(o => o.Id == item.Ninja.Id);
+                var e = ctx.EquipmentSet.First(o => o.Id == item.Equipment.Id);
                 ctx.NinjaEquipmentSet.Add(new NinjaEquipment(){ Ninja = n, Equipment = e });
                 ctx.SaveChanges();
                 return true;

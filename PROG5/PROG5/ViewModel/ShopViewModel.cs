@@ -47,7 +47,7 @@ namespace PROG5.ViewModel
                 _selectedEquipment = value;
                 var repo = NinjaEquipmentRepository.GetAll();
                 if (repo.FirstOrDefault(o =>
-                        o.NinjaViewModel.Id == Ninja.Id && o.EquipmentViewModel.Id == _selectedEquipment.Id) != null)
+                        o.Ninja.Id == Ninja.Id && o.Equipment.Id == _selectedEquipment.Id) != null)
                     _hasEquipment = true;
                 _hasEquipment = false;
                 RaisePropertyChanged();
@@ -104,8 +104,8 @@ namespace PROG5.ViewModel
         {
             NinjaEquipmentRepository.Add(new NinjaEquipmentViewModel()
             {
-                EquipmentViewModel = SelectedEquipment,
-                NinjaViewModel = Ninja
+                Equipment = SelectedEquipment,
+                Ninja = Ninja
             });
             Ninja.Gold -= SelectedEquipment.Gold;
             NinjaRepository.Update(Ninja);

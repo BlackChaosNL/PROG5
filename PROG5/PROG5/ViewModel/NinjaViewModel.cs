@@ -1,3 +1,6 @@
+using PROG5.Repository.Interfaces;
+using System.Linq;
+
 namespace PROG5.ViewModel
 {
     public class NinjaViewModel
@@ -16,11 +19,31 @@ namespace PROG5.ViewModel
 
         public int Strength { get; set; }
 
-        public NinjaViewModel()
+        private INinjaEquipmentRepository ninjaEquipmentRepository;
+
+        public NinjaViewModel(INinjaEquipmentRepository repository)
         {
-            // Default values, should be overridden on instantiation
-            Gold = 9001;
-            Name = "John Doe";
+            ninjaEquipmentRepository = repository;
+
+            #region Set default stats
+            Agility = 0;
+            Intelligence = 0;
+            Strength = 0;
+            RemainingGold = Gold;
+            #endregion
+
+            #region Set the ninja's stats
+            var equipment = ninjaEquipmentRepository.GetAll().Where(
+                x => x.Ninja.Id == Id
+            );
+
+            foreach (var item in equipment) {
+                Agility += item.Equipment.Agi;
+                Intelligence += item.Equipment.Int;
+                Strength += item.Equipment.Str;
+                RemainingGold -= item.Equipment.Gold;
+            }
+            #endregion
         }
     }
 }
