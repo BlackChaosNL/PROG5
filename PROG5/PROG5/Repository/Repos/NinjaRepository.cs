@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using PROG5.Entities;
 using PROG5.Repository.Interfaces;
 using PROG5.ViewModel;
@@ -11,7 +12,7 @@ namespace PROG5.Repository.Repos
         {
             var ninjas = new ObservableCollection<NinjaViewModel>();
             using (var ctx = new DatabaseModelContainer()) {
-                foreach (var ninja in ctx.NinjaSet) {
+                foreach (var ninja in ctx.NinjaSet.ToList()) {
                     ninjas.Add(new NinjaViewModel() {
                         Id = ninja.Id,
                         Gold = ninja.Gold,
@@ -47,7 +48,7 @@ namespace PROG5.Repository.Repos
         public bool Update(NinjaViewModel item)
         {
             using (var ctx = new DatabaseModelContainer()) {
-                var ninja = ctx.NinjaSet.Find(new Ninja() { Id = item.Id });
+                var ninja = ctx.NinjaSet.First(o => o.Id == item.Id);
                 ninja.Gold = item.Gold;
                 ninja.Name = item.Name;
                 ctx.SaveChanges();

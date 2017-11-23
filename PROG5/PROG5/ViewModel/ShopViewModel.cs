@@ -10,6 +10,7 @@ namespace PROG5.ViewModel
 {
     public class ShopViewModel : ViewModelBase
     {
+        #region Data
         public ICommand CloseCommand { get; set; }
 
         public ICommand ItemCommand { get; set; }
@@ -20,22 +21,36 @@ namespace PROG5.ViewModel
 
         public ICommand SellCommand { get; set; }
 
-        public NinjaViewModel Ninja {
-            get
-            {
-                return showNinjaViewModel.SelectedNinja;
-            }
-        }
+        public IEquipmentTypeRepository TypeRepository { get; set; }
 
-        public EquipmentViewModel SelectedEquipment {
+        public IEquipmentRepository EquipmentRepository { get; set; }
+
+        public INinjaEquipmentRepository NinjaEquipmentRepository { get; set; }
+
+        public INinjaRepository NinjaRepository { get; set; }
+
+        private bool _hasEquipment;
+
+        private EquipmentViewModel _selectedEquipment;
+
+        private ObservableCollection<EquipmentViewModel> _equipment;
+
+        private ShowNinjaViewModel _showNinjaViewModel;
+
+        public NinjaViewModel Ninja => _showNinjaViewModel.SelectedNinja;
+
+        public EquipmentViewModel SelectedEquipment
+        {
             get => _selectedEquipment;
-
             set
             {
                 _selectedEquipment = value;
-
-                // TODO: Check if the currently selected ninja already has the currently selected equipment
-                hasEquipment = false;
+                var repo = NinjaEquipmentRepository.GetAll();
+                if (repo.FirstOrDefault(o =>
+                        o.NinjaViewModel.Id == Ninja.Id && o.EquipmentViewModel.Id == _selectedEquipment.Id) != null)
+                    _hasEquipment = true;
+                _hasEquipment = false;
+                RaisePropertyChanged();
             }
         }
 
@@ -46,59 +61,66 @@ namespace PROG5.ViewModel
             get => SavedEquipmentTypeViewModel;
             set
             {
-                // Update the equipment list
-                Equipment = EquipmentRepository.GetAllFromType(value);
-
-                // Save the newly selected type
                 SavedEquipmentTypeViewModel = value;
+                GetEquipment = EquipmentRepository.GetAllFromType(value);
+                RaisePropertyChanged();
             }
         }
 
         public ObservableCollection<EquipmentTypeViewModel> EquipmentType => TypeRepository.GetAll();
 
-        public ObservableCollection<EquipmentViewModel> Equipment { get; set; }
-
-        public IEquipmentTypeRepository TypeRepository { get; set; }
-
-        public IEquipmentRepository EquipmentRepository { get; set; }
-
-        public INinjaEquipmentRepository NinjaEquipmentRepository { get; set; }
-
-        private bool hasEquipment;
-
-        private EquipmentViewModel _selectedEquipment;
-
-        private ShowNinjaViewModel showNinjaViewModel;
+        public ObservableCollection<EquipmentViewModel> GetEquipment
+        {
+            get => _equipment;
+            set
+            {
+                _equipment = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
 
         public ShopViewModel(
             ShowNinjaViewModel sh,
             IEquipmentTypeRepository types,
             IEquipmentRepository equipment,
-            INinjaEquipmentRepository link
+            INinjaEquipmentRepository link,
+            INinjaRepository ninja
         ) {
-            showNinjaViewModel = sh;
-            hasEquipment = false;
-            TypeRepository = types;
+            _showNinjaViewModel = sh;
+            _hasEquipment = false;
+            TypeRepository = types; 
             NinjaEquipmentRepository = link;
             EquipmentRepository = equipment;
+            NinjaRepository = ninja;
             CloseCommand = new RelayCommand(Close);
             ItemCommand = new RelayCommand(ItemManagementWindow);
             TypeCommand = new RelayCommand(TypeManagementWindow);
-            BuyCommand = new RelayCommand(BuyItem, () => SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.Gold && !hasEquipment);
-            SellCommand = new RelayCommand(SellItem, () => SelectedEquipment != null && hasEquipment);
+            BuyCommand = new RelayCommand(BuyItem, () => SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.Gold && !_hasEquipment);
+            SellCommand = new RelayCommand(SellItem, () => SelectedEquipment != null && _hasEquipment);
         }
 
         public void BuyItem()
         {
-
+            NinjaEquipmentRepository.Add(new NinjaEquipmentViewModel()
+            {
+                EquipmentViewModel = SelectedEquipment,
+                NinjaViewModel = Ninja
+            });
+            Ninja.Gold -= SelectedEquipment.Gold;
+            NinjaRepository.Update(Ninja);
+            RaisePropertyChanged();
         }
 
         public void SellItem()
         {
 
+            Ninja.Gold += SelectedEquipment.Gold;
+            NinjaRepository.Update(Ninja);
+            RaisePropertyChanged();
         }
 
-        #region Controls
+        #region Main buttons
         public void TypeManagementWindow()
         {
             var window = new TypeManagementWindow();

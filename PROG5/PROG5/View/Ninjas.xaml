@@ -3,15 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PROG5"
         mc:Ignorable="d"
         Title="Ninja Manager" Height="354.62" Width="511.138" ResizeMode="NoResize"
-        DataContext="{Binding Main, Source={StaticResource Locator}}"
-        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System">
-
-    <Window.Resources>
-       <componentModel:BooleanConverter x:Key="BooleanConverter" />
-    </Window.Resources>
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid Margin="0,0,2,0">
         <Button Content="Add Ninja" HorizontalAlignment="Left" VerticalAlignment="Top" 
                 Width="102" Margin="10,10,0,0" Height="35" Command="{Binding CreateNinja}" />
@@ -26,7 +20,7 @@
                  Margin="117,10,0,0" 
                  VerticalAlignment="Top" 
                  Width="185" 
-                 ItemsSource="{ Binding NinjaCollection }"
+                 ItemsSource="{Binding NinjaCollection}"
                  SelectedItem="{Binding Path=SelectedNinja, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
