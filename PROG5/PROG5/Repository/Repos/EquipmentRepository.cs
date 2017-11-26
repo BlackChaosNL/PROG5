@@ -18,7 +18,13 @@ namespace PROG5.Repository.Repos
                         Agi = item.Agi,
                         Str = item.Str,
                         Int = item.Int,
-                        Name = item.Name
+                        Gold = item.Gold,
+                        Name = item.Name,
+                        EquipmentTypeViewModel = new EquipmentTypeViewModel()
+                        {
+                            Id = item.EquipmentType.Id,
+                            Name = item.EquipmentType.Name
+                        }
                     });
                 }
             }
@@ -42,6 +48,7 @@ namespace PROG5.Repository.Repos
                         Agi = item.Agi,
                         Str = item.Str,
                         Int = item.Int,
+                        Gold = item.Gold,
                         Name = item.Name,
                         EquipmentTypeViewModel = new EquipmentTypeViewModel {
                             Id = item.EquipmentType.Id,
@@ -61,7 +68,9 @@ namespace PROG5.Repository.Repos
                     Agi = item.Agi,
                     Str = item.Str,
                     Int = item.Int,
-                    Name = item.Name
+                    Name = item.Name,
+                    Gold = item.Gold,
+                    EquipmentType = ctx.EquipmentTypeSet.First(o => o.Id == item.Id)
                 });
                 ctx.SaveChanges();
             }

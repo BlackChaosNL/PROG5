@@ -37,9 +37,17 @@ namespace PROG5.ViewModel
 
         private ObservableCollection<EquipmentViewModel> _equipment;
 
-        private ShowNinjaViewModel _showNinjaViewModel;
-
-        public NinjaViewModel Ninja => _showNinjaViewModel.SelectedNinja;
+        public NinjaViewModel GetNinjaViewModel
+        {
+            get => Ninja;
+            set
+            {
+                Ninja = value;
+                RaisePropertyChanged();
+            }
+        }
+        
+        public NinjaViewModel Ninja { get; set; }
 
         public EquipmentViewModel SelectedEquipment
         {
@@ -49,16 +57,12 @@ namespace PROG5.ViewModel
                 _selectedEquipment = value;
 
                 var repo = NinjaEquipmentRepository.GetAll();
-                var equipmentResult = repo.FirstOrDefault(
-                    o => o.Ninja.Id == Ninja.Id && o.Equipment.Id == _selectedEquipment.Id
-                );
-                var equipmentTypeResult = repo.FirstOrDefault(
-                    o => o.Ninja.Id == Ninja.Id &&
-                    o.Equipment.EquipmentTypeViewModel.Id == _selectedEquipment.EquipmentTypeViewModel.Id
-                );
+                var equipmentResult = repo.Any(o => o.Ninja.Id == Ninja.Id && o.Equipment.Id == (_selectedEquipment?.Id ?? 0));
+                var equipmentTypeResult = _selectedEquipment != null && repo.Any(o => o.Ninja.Id == Ninja.Id &&
+                                                                                        o.Equipment.Id == EquipmentRepository.GetAll().First(l => l.Id == _selectedEquipment.Id).EquipmentTypeViewModel.Id);
                 
-                _hasEquipment = (equipmentResult != null);
-                _hasEquipmentType = (equipmentTypeResult != null);
+                _hasEquipment = equipmentResult;
+                _hasEquipmentType = equipmentTypeResult;
 
                 RaisePropertyChanged();
             }
@@ -96,8 +100,9 @@ namespace PROG5.ViewModel
             IEquipmentRepository equipment,
             INinjaEquipmentRepository link,
             INinjaRepository ninja
-        ) {
-            _showNinjaViewModel = sh;
+        )
+        {
+            GetNinjaViewModel = sh.SelectedNinja;
             _hasEquipment = false;
             _hasEquipmentType = false;
             TypeRepository = types; 
@@ -118,16 +123,20 @@ namespace PROG5.ViewModel
                 Equipment = SelectedEquipment,
                 Ninja = Ninja
             });
-
-            Ninja.Gold -= SelectedEquipment.Gold;
-            NinjaRepository.Update(Ninja);
+            GetNinjaViewModel.Gold -= SelectedEquipment.Gold;
+            NinjaRepository.Update(GetNinjaViewModel);
             RaisePropertyChanged();
         }
 
         public void SellItem()
         {
-            Ninja.Gold += SelectedEquipment.Gold;
-            NinjaRepository.Update(Ninja);
+            NinjaEquipmentRepository.Delete(new NinjaEquipmentViewModel()
+            {
+                Equipment = SelectedEquipment,
+                Ninja = Ninja
+            });
+            GetNinjaViewModel.Gold += SelectedEquipment.Gold;
+            NinjaRepository.Update(GetNinjaViewModel);
             RaisePropertyChanged();
         }
 

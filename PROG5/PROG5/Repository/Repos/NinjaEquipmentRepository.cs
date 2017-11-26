@@ -19,10 +19,16 @@ namespace PROG5.Repository.Repos
                     ninjaEquipment.Add(new NinjaEquipmentViewModel {
                         Id = equipment.Id,
                         Equipment = new EquipmentViewModel {
-                            Id = equipment.Equipment.Id
+                            Id = equipment.Equipment.Id,
+                            Agi = equipment.Equipment.Agi,
+                            Gold = equipment.Equipment.Gold,
+                            Int = equipment.Equipment.Int,
+                            Name = equipment.Equipment.Name
                         },
                         Ninja = new NinjaViewModel {
-                            Id = equipment.Ninja.Id
+                            Id = equipment.Ninja.Id,
+                            Gold = equipment.Ninja.Gold,
+                            Name = equipment.Ninja.Name
                         }
                     });
                 }
@@ -35,12 +41,9 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
-                var n = ctx.NinjaSet.First(o => o.Id == item.Ninja.Id);
-                var e = ctx.EquipmentSet.First(o => o.Id == item.Equipment.Id);
-
                 ctx.NinjaEquipmentSet.Add(new NinjaEquipment {
-                    Ninja = n,
-                    Equipment = e
+                    Ninja = ctx.NinjaSet.FirstOrDefault(o => o.Id == item.Ninja.Id),
+                    Equipment = ctx.EquipmentSet.FirstOrDefault(o => o.Id == item.Equipment.Id)
                 });
                 ctx.SaveChanges();
 
@@ -52,9 +55,7 @@ namespace PROG5.Repository.Repos
         {
             using (var ctx = new DatabaseModelContainer())
             {
-                ctx.NinjaEquipmentSet.Remove(new NinjaEquipment {
-                    Id = item.Id
-                });
+                ctx.NinjaEquipmentSet.Remove(ctx.NinjaEquipmentSet.First(o => o.Ninja.Id == item.Ninja.Id && o.Equipment.Id == item.Equipment.Id));
                 ctx.SaveChanges();
 
                 return true;

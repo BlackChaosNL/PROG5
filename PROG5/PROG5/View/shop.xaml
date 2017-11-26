@@ -45,8 +45,8 @@
         <Button Content="Item Types" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TypeCommand}"/>
         <Button Content="Buy" HorizontalAlignment="Left" Margin="90,239,0,0" VerticalAlignment="Top" Width="69" Command="{Binding BuyCommand}"/>
         <Button Content="Sell" HorizontalAlignment="Left" Margin="162,239,0,0" VerticalAlignment="Top" Width="70" Command="{Binding SellCommand}"/>
-        <TextBox Height="23" Margin="10,112,0,0" TextWrapping="Wrap" Text="{Binding Ninja.Gold, Mode=OneWay}" VerticalAlignment="Top" Width="74" 
+        <TextBox Height="23" Margin="10,112,0,0" TextWrapping="Wrap" Text="{Binding GetNinjaViewModel.Gold, Mode=OneWay}" VerticalAlignment="Top" Width="74" 
             HorizontalAlignment="Left" TextAlignment="Center" IsReadOnly="True" />
-        <Label Content="{Binding Ninja.Name}" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="74" Height="26"/>
+        <Label Content="{Binding GetNinjaViewModel.Name}" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="74" Height="26"/>
     </Grid>
 </Window>
