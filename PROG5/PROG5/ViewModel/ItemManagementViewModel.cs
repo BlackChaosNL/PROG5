@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -13,15 +14,36 @@ namespace PROG5.ViewModel
         public IEquipmentTypeRepository EquipmentTypeRepository { get; set; }
         public ObservableCollection<EquipmentTypeViewModel> EquipmentTypeCollection => EquipmentTypeRepository.GetAll();
         public ObservableCollection<EquipmentViewModel> EquipmentCollection { get; set; }
+        public EquipmentViewModel Equipment { get; set; }
+        public EquipmentViewModel NewEquipmentVm { get; set; }
+        public EquipmentViewModel NewEquipmentViewModel
+        {
+            get => NewEquipmentViewModel;
+            set
+            {
+                NewEquipmentVm = value;
+                RaisePropertyChanged();
+            }
+        }
+        public EquipmentViewModel SelectedEquipmentViewModel
+        {
+            get => Equipment;
+            set
+            {
+                Equipment = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public ItemManagementViewModel(IEquipmentTypeRepository equipmentType, 
             IEquipmentRepository equipment)
         {
             EquipmentTypeRepository = equipmentType;
             EquipmentRepository = equipment;
-            AddCommand = new RelayCommand(Add, () => true);
-            RemoveCommand = new RelayCommand(Remove, () => true);
-            ExitCommand = new RelayCommand(Exit, () => true);
+            AddCommand = new RelayCommand(Add, () => CheckAddableEtvm(NewEquipmentViewModel));
+            RemoveCommand = new RelayCommand(Remove, () => SelectedEquipmentViewModel != null);
+            ExitCommand = new RelayCommand(Exit);
+            NewEquipmentViewModel = new EquipmentViewModel();
         }
 
         #region Buttons
@@ -46,7 +68,10 @@ namespace PROG5.ViewModel
         #endregion
 
         #region Add
-
+        bool CheckAddableEtvm(EquipmentViewModel e)
+        {
+            return e.Name != null;
+        }
         #endregion
 
         #region Remove
