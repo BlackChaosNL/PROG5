@@ -123,7 +123,8 @@ namespace PROG5.ViewModel
                 Equipment = SelectedEquipment,
                 Ninja = Ninja
             });
-            GetNinjaViewModel.Gold -= SelectedEquipment.Gold;
+
+            GetNinjaViewModel.RemainingGold -= SelectedEquipment.Gold;
             NinjaRepository.Update(GetNinjaViewModel);
             RaisePropertyChanged();
         }
@@ -135,7 +136,8 @@ namespace PROG5.ViewModel
                 Equipment = SelectedEquipment,
                 Ninja = Ninja
             });
-            GetNinjaViewModel.Gold += SelectedEquipment.Gold;
+
+            GetNinjaViewModel.RemainingGold += SelectedEquipment.Gold;
             NinjaRepository.Update(GetNinjaViewModel);
             RaisePropertyChanged();
         }
