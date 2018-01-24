@@ -112,8 +112,21 @@ namespace PROG5.ViewModel
             CloseCommand = new RelayCommand(Close);
             ItemCommand = new RelayCommand(ItemManagementWindow);
             TypeCommand = new RelayCommand(TypeManagementWindow);
-            BuyCommand = new RelayCommand(BuyItem, () => SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.Gold && !_hasEquipmentType);
-            SellCommand = new RelayCommand(SellItem, () => SelectedEquipment != null && _hasEquipment);
+            BuyCommand = new RelayCommand(BuyItem, ReturnBuyItem);
+            SellCommand = new RelayCommand(SellItem, ReturnSellItem);
+        }
+        private bool ReturnBuyItem()
+        {
+            if (SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.RemainingGold) return false;
+            if (!_hasEquipmentType) return false;
+            return true;
+        }
+        private bool ReturnSellItem()
+        {
+            // To sell item needs to exist, and ninja needs to have the equipment.
+            if (SelectedEquipment != null) return false;
+            if (!_hasEquipment) return false; 
+            return true;
         }
 
         public void BuyItem()
