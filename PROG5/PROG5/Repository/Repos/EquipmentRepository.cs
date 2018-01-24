@@ -70,7 +70,7 @@ namespace PROG5.Repository.Repos
                     Int = item.Int,
                     Name = item.Name,
                     Gold = item.Gold,
-                    EquipmentType = ctx.EquipmentTypeSet.First(o => o.Id == item.Id)
+                    EquipmentType = ctx.EquipmentTypeSet.First(o => o.Id == item.EquipmentTypeViewModel.Id)
                 });
                 ctx.SaveChanges();
             }

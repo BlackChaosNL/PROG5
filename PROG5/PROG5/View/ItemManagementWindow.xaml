@@ -24,7 +24,7 @@
         <Label Content="Intelligence" HorizontalAlignment="Left" Margin="18,101,0,0" VerticalAlignment="Top" Width="73"/>
         <Label Content="Agility" HorizontalAlignment="Left" Margin="19,146,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="101,53,0,0" 
-                 TextWrapping="Wrap" Text="{Binding NewEquipmentVm.Name, FallbackValue='John Doe'}" VerticalAlignment="Top" Width="128"/>
+                 TextWrapping="Wrap" Text="{Binding NewEquipmentVm.Name, FallbackValue='Mighty stick of 💩'}" VerticalAlignment="Top" Width="128"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="101,78,0,0" 
                  TextWrapping="Wrap" Text="{Binding NewEquipmentVm.Gold, FallbackValue='0', StringFormat=\{0:D\}}" VerticalAlignment="Top" Width="128"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="101,102,0,0" 

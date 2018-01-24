@@ -18,13 +18,14 @@ namespace PROG5.ViewModel
         public EquipmentViewModel NewEquipmentVm { get; set; }
         public EquipmentViewModel NewEquipmentViewModel
         {
-            get => NewEquipmentViewModel;
+            get => NewEquipmentVm;
             set
             {
                 NewEquipmentVm = value;
                 RaisePropertyChanged();
             }
         }
+
         public EquipmentViewModel SelectedEquipmentViewModel
         {
             get => Equipment;
@@ -34,14 +35,14 @@ namespace PROG5.ViewModel
                 RaisePropertyChanged();
             }
         }
-
+        
         public ItemManagementViewModel(IEquipmentTypeRepository equipmentType, 
             IEquipmentRepository equipment)
         {
             EquipmentTypeRepository = equipmentType;
             EquipmentRepository = equipment;
             AddCommand = new RelayCommand(Add, () => CheckAddableEtvm(NewEquipmentViewModel));
-            RemoveCommand = new RelayCommand(Remove, () => SelectedEquipmentViewModel != null);
+            RemoveCommand = new RelayCommand(Remove, () => _selectedEquipment != null);
             ExitCommand = new RelayCommand(Exit);
             NewEquipmentViewModel = new EquipmentViewModel();
         }
@@ -50,14 +51,6 @@ namespace PROG5.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand ExitCommand { get; set; }
-        public void Add()
-        {
-            
-        }
-        public void Remove()
-        {
-            
-        }
         public void Exit()
         {
             var shop = new Shop();
@@ -68,13 +61,26 @@ namespace PROG5.ViewModel
         #endregion
 
         #region Add
-        bool CheckAddableEtvm(EquipmentViewModel e)
+        public void Add()
         {
-            return e.Name != null;
+            EquipmentRepository.Add(NewEquipmentViewModel);
+            RaisePropertyChanged();
+        }
+        private bool CheckAddableEtvm(EquipmentViewModel e)
+        {
+            // Check if Item has correct values, only name & gold needs to be checked in this usecase.
+            if (e.Name == null) return false;
+            if (e.Gold < 1) return false;
+            return true;
         }
         #endregion
 
         #region Remove
+        public void Remove()
+        {
+            EquipmentRepository.Delete(_selectedEquipment);
+            GetEquipment = EquipmentRepository.GetAllFromType(_selectedEquipmentTypeViewModel);
+        }
         private ObservableCollection<EquipmentViewModel> _equipment;
         private EquipmentViewModel _selectedEquipment;
         private EquipmentTypeViewModel _selectedEquipmentTypeViewModel;
