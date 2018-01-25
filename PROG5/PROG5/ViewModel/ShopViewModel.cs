@@ -57,15 +57,47 @@ namespace PROG5.ViewModel
                 _selectedEquipment = value;
 
                 var repo = NinjaEquipmentRepository.GetAll();
-                var equipmentResult = repo.Any(o => o.Ninja.Id == Ninja.Id && o.Equipment.Id == (_selectedEquipment?.Id ?? 0));
-                var equipmentTypeResult = _selectedEquipment != null && repo.Any(o => o.Ninja.Id == Ninja.Id &&
-                                                                                        o.Equipment.Id == EquipmentRepository.GetAll().First(l => l.Id == _selectedEquipment.Id).EquipmentTypeViewModel.Id);
-                
+                var equipmentResult = repo.Any(o => ValidEquipment(o, _selectedEquipment?.Id ?? 0));
+                var equipmentTypeResult = _selectedEquipment != null && repo.Any(o => ValidEquipmentType(o));
+
                 _hasEquipment = equipmentResult;
                 _hasEquipmentType = equipmentTypeResult;
 
                 RaisePropertyChanged();
             }
+        }
+
+        private bool ValidEquipment(
+            NinjaEquipmentViewModel o,
+            int equipmentId
+        )
+        {
+            if (o.Ninja.Id != Ninja.Id) {
+                return false;
+            }
+
+            if (o.Equipment.Id != equipmentId) {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidEquipmentType(
+            NinjaEquipmentViewModel o
+        )
+        {
+            if (o.Ninja.Id != Ninja.Id) {
+                return false;
+            }
+
+            EquipmentViewModel equipment = EquipmentRepository.GetAll().First(x => x.Id == _selectedEquipment.Id);
+
+            if (o.Equipment.Id != equipment.EquipmentTypeViewModel.Id) {
+                return false;
+            }
+
+            return true;
         }
 
         public EquipmentTypeViewModel SavedEquipmentTypeViewModel { get; set; }
@@ -115,17 +147,48 @@ namespace PROG5.ViewModel
             BuyCommand = new RelayCommand(BuyItem, ReturnBuyItem);
             SellCommand = new RelayCommand(SellItem, ReturnSellItem);
         }
+
         private bool ReturnBuyItem()
         {
-            if (SelectedEquipment != null && SelectedEquipment.Gold <= Ninja.RemainingGold) return false;
-            if (!_hasEquipmentType) return false;
+            // Equipment has to be selected
+            if (SelectedEquipment == null) {
+                System.Console.WriteLine("Nothing selected");
+
+                return false;
+            }
+
+            // Ninja must have enough gold
+            if (Ninja.RemainingGold < SelectedEquipment.Gold) {
+                System.Console.WriteLine("Too poor");
+
+                return false;
+            }
+
+            // Ninja may not have two of the same equipment types
+            if (!_hasEquipmentType) {
+                System.Console.WriteLine("Already have this type");
+
+                return false;
+            }
+
             return true;
         }
+
         private bool ReturnSellItem()
         {
-            // To sell item needs to exist, and ninja needs to have the equipment.
-            if (SelectedEquipment != null) return false;
-            if (!_hasEquipment) return false; 
+            // An item has to be selected
+            if (SelectedEquipment != null) {
+                System.Console.WriteLine("Nothing selected");
+
+                return false;
+            }
+
+            // Ninja must have this equipment piece to sell it
+            if (!_hasEquipment) {
+                System.Console.WriteLine("Not owned");
+                return false;
+            }
+
             return true;
         }
 
