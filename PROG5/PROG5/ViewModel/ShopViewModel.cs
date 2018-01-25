@@ -56,9 +56,9 @@ namespace PROG5.ViewModel
             {
                 _selectedEquipment = value;
 
-                var repo = NinjaEquipmentRepository.GetAll();
-                var equipmentResult = repo.Any(o => ValidEquipment(o, _selectedEquipment?.Id ?? 0));
-                var equipmentTypeResult = _selectedEquipment != null && repo.Any(o => ValidEquipmentType(o));
+                ObservableCollection<NinjaEquipmentViewModel> repo = NinjaEquipmentRepository.GetAll();
+                bool equipmentResult = repo.Any(o => ValidEquipment(o, _selectedEquipment?.Id ?? 0));
+                bool equipmentTypeResult = _selectedEquipment != null && repo.Any(o => ValidEquipmentType(o));
 
                 _hasEquipment = equipmentResult;
                 _hasEquipmentType = equipmentTypeResult;
