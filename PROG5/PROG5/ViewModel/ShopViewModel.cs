@@ -93,7 +93,7 @@ namespace PROG5.ViewModel
 
             EquipmentViewModel equipment = EquipmentRepository.GetAll().First(x => x.Id == _selectedEquipment.Id);
 
-            if (o.Equipment.Id != equipment.EquipmentTypeViewModel.Id) {
+            if (o.Equipment.Id == equipment.EquipmentTypeViewModel.Id) {
                 return false;
             }
 
@@ -152,21 +152,21 @@ namespace PROG5.ViewModel
         {
             // Equipment has to be selected
             if (SelectedEquipment == null) {
-                System.Console.WriteLine("Nothing selected");
+                System.Console.WriteLine("BUY: Nothing selected");
 
                 return false;
             }
 
             // Ninja must have enough gold
             if (Ninja.RemainingGold < SelectedEquipment.Gold) {
-                System.Console.WriteLine("Too poor");
+                System.Console.WriteLine("BUY: Too poor");
 
                 return false;
             }
 
             // Ninja may not have two of the same equipment types
-            if (!_hasEquipmentType) {
-                System.Console.WriteLine("Already have this type");
+            if (_hasEquipmentType) {
+                System.Console.WriteLine("BUY: Already have this type");
 
                 return false;
             }
@@ -177,15 +177,16 @@ namespace PROG5.ViewModel
         private bool ReturnSellItem()
         {
             // An item has to be selected
-            if (SelectedEquipment != null) {
-                System.Console.WriteLine("Nothing selected");
+            if (SelectedEquipment == null) {
+                System.Console.WriteLine("SELL: Nothing selected");
 
                 return false;
             }
 
             // Ninja must have this equipment piece to sell it
             if (!_hasEquipment) {
-                System.Console.WriteLine("Not owned");
+                System.Console.WriteLine("SELL: Not owned");
+
                 return false;
             }
 
