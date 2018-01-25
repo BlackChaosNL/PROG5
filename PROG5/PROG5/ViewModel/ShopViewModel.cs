@@ -67,39 +67,6 @@ namespace PROG5.ViewModel
             }
         }
 
-        private bool ValidEquipment(
-            NinjaEquipmentViewModel o,
-            int equipmentId
-        )
-        {
-            if (o.Ninja.Id != Ninja.Id) {
-                return false;
-            }
-
-            if (o.Equipment.Id != equipmentId) {
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidEquipmentType(
-            NinjaEquipmentViewModel o
-        )
-        {
-            if (o.Ninja.Id != Ninja.Id) {
-                return false;
-            }
-
-            EquipmentViewModel equipment = EquipmentRepository.GetAll().First(x => x.Id == _selectedEquipment.Id);
-
-            if (o.Equipment.Id == equipment.EquipmentTypeViewModel.Id) {
-                return false;
-            }
-
-            return true;
-        }
-
         public EquipmentTypeViewModel SavedEquipmentTypeViewModel { get; set; }
 
         public EquipmentTypeViewModel SelectedEquipmentType
@@ -217,6 +184,39 @@ namespace PROG5.ViewModel
             GetNinjaViewModel.RemainingGold += SelectedEquipment.Gold;
             NinjaRepository.Update(GetNinjaViewModel);
             RaisePropertyChanged();
+        }
+
+        private bool ValidEquipment(
+            NinjaEquipmentViewModel o,
+            int equipmentId
+        )
+        {
+            if (o.Ninja.Id != Ninja.Id) {
+                return false;
+            }
+
+            if (o.Equipment.Id != equipmentId) {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidEquipmentType(
+            NinjaEquipmentViewModel o
+        )
+        {
+            if (o.Ninja.Id != Ninja.Id) {
+                return false;
+            }
+
+            EquipmentViewModel equipment = EquipmentRepository.GetAll().First(x => x.Id == _selectedEquipment.Id);
+
+            if (o.Equipment.Id == equipment.EquipmentTypeViewModel.Id) {
+                return false;
+            }
+
+            return true;
         }
 
         #region Main buttons
